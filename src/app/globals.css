@@ -1,6 +1,9 @@
+/* import the variable app tokens */
+@import '../styles/ui/variables.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 body {
   font-family: Arial, Helvetica, sans-serif;

@@ -1,0 +1,35 @@
+{
+    "color": {
+        "olive": {
+            "50": {
+                "value": "#EDE1D1"
+            },
+            "100": {
+                "value": "#E3D3BE"
+            }
+        },
+        "amber": {
+            "100": {
+                "value": "#E6C285"
+            },
+            "200": {
+                "value": "#F8E2C5"
+            },
+            "300": {
+                "value": "#FFE4B5"
+            }
+        },
+        "forest-green": {
+            "value": "#051F13"
+        },
+        "chocolate-brown": {
+            "value": "#442408"
+        },
+        "divider-gray": {
+            "value": "#C0B5A7"
+        },
+        "divider-amber": {
+            "value": "#ECD7BB"
+        }
+    }
+}

@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-
+  
 export default {
     darkMode: ["class"],
     content: [
@@ -49,7 +49,22 @@ export default {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
+  			},
+			// EXTENDING APP COLORS
+			olive: {
+				50: 'var(--color-olive-50)',
+				100: 'var(--color-olive-100)',
+			},
+			amber: {
+				100: 'var(--color-amber-100)',
+				200: 'var(--color-amber-200)',
+				300: 'var(--color-amber-300)',
+			},
+			'forest-green': 'var(--color-forest-green)',
+			'chocolate-brown': 'var(--color-chocolate-brown)',
+			'divider-gray': 'var(--color-divider-gray)',
+			'divider-amber': 'var(--color-divider-amber)',
+			
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

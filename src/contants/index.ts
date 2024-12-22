@@ -1,0 +1,17 @@
+export enum RichTextAction {
+    Bold = "bold",
+    Italics = "italics",
+    Underline = "underline",
+    Strikethrough = "strikethrough",
+    Superscript = "superscript",
+    Subscript = "subscript",
+    Highlight = "highlight",
+    Code = "code",
+    LeftAlign = "leftAlign",
+    CenterAlign = "centerAlign",
+    RightAlign = "rightAlign",
+    JustifyAlign = "justifyAlign",
+    Divider = "divider",
+    Undo = "undo",
+    Redo = "redo",
+}
