@@ -1,6 +1,7 @@
 "use client"
 import './page.css';
 import { RichTextEditor } from "@/lib/RichTextEditor";
+import { RichTextToolbar } from '@/components/common/RichTextToolbar';
 
 export default function RichText () {
     return (
@@ -10,7 +11,9 @@ export default function RichText () {
                 onChange={()=>null}
                 name="rich text editor"
             />
-            <p className='text-chocolate-brown'>TESTING</p>
+            <h1 className='roboto'>Abracadabra</h1>
+            <p>NOT ROBOTO</p>
+            <RichTextToolbar />
         </div>
     )
 }

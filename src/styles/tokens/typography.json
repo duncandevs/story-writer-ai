@@ -1,0 +1,12 @@
+{
+    "font": {
+        "h1": {
+            "font-size": {
+                "value": "48px"
+            },
+            "font-weight": {
+                "value": "bold"
+            }
+        }
+    }
+}

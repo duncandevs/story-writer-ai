@@ -1,0 +1,29 @@
+.Toolbar {
+    width: 324px;
+    height: 57px;
+    background-color: var(--color-amber-200);
+    border-radius: 16px;
+    padding: 12px;
+}
+
+.ToolbarContent {
+    margin: auto;
+    justify-content: space-around;
+}
+
+.ToolbarAction {
+    height: auto;
+    width: auto;
+}
+
+.ToolbarAction > :first-child:hover {
+    stroke: var(--color-amber-100);
+}
+
+.ToolbarDivider {
+    display: inline-block; 
+    height: auto;
+    width: 1.5px;
+    background-color:var(--color-divider-gray);
+    margin: 0 10px;
+}
