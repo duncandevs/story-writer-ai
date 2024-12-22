@@ -1,3 +1,4 @@
+"use client"
 import { Card } from "@/components/ui/card";
 import React, { useMemo } from "react";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
@@ -10,6 +11,7 @@ import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { cn } from "./utils";
+import { css } from "@emotion/css";
 
 import { ImagePlugin } from "./plugins/ImagePlugin";
 // import CustomOnChangePlugin from "./Plugins/CustomOnChangePlugin";
@@ -48,18 +50,13 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
     );
 
     return (
-      <Card>
         <LexicalComposer initialConfig={initialConfig}>
-            <ImagePlugin />
-            <ToolbarPlugin />
-          {/* <ToolbarPlugin /> */}
-          <Card style={{height: 350}}>
             <RichTextPlugin
               contentEditable={
                 <ContentEditable
-                  className={cn({
-                    height: `100%`,
-                    fontSize: 12,
+                  className={css({
+                    height: `inherit`,
+                    fontSize: 22,
                     padding: 8,
                     overflow: "auto",
                     outline: "none",
@@ -70,7 +67,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
               }
               placeholder={
                 <Card
-                  className={cn({
+                  className={css({
                     position: "absolute",
                     color: "#999",
                     top: 8,
@@ -83,13 +80,19 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
               }
               ErrorBoundary={LexicalErrorBoundary}
             />
-          </Card>
           <AutoFocusPlugin />
           <HistoryPlugin />
           <ListPlugin />
           {/* <CustomOnChangePlugin value={value} onChange={onChange} /> */}
+          <div style={{
+                position: 'absolute', 
+                left: 0, 
+                right: 0, 
+                bottom: '24%',
+                marginInline: 'auto', 
+                width: "fit-content",
+        }}><ToolbarPlugin /></div>
         </LexicalComposer>
-      </Card>
     );
   }
 );

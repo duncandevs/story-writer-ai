@@ -5,7 +5,6 @@ import {
   $isRangeSelection,
   TextFormatType,
   $isTextNode,
-  LexicalNode,
   TextNode
 } from "lexical";
 import { RichTextAction } from "@/contants";
@@ -34,7 +33,7 @@ const _mergeNodeStyle = (node: TextNode, styles = {}) => {
         delete styleObj[key];
       } else {
         // Otherwise, add or update the style
-        styleObj[key] = value;
+        styleObj[key] = value as string;
       }
     }
   
@@ -120,7 +119,7 @@ export function ToolbarPlugin() {
   }, [editor]);
 
   return (
-    <div className="flex gap-4 toolbar">
+    <div className="flex gap-4">
       <RichTextToolbar 
         onAIImageAction={onAddImage}
         onAITextAction={()=>null}

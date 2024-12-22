@@ -12,6 +12,7 @@
     "watch:tokens": "style-dictionary build --config config/style-dictionary.config.js --watch"
   },
   "dependencies": {
+    "@emotion/css": "^11.13.5",
     "@fontsource/roboto": "^5.1.0",
     "@lexical/react": "^0.16.0",
     "@next/font": "^14.2.15",
