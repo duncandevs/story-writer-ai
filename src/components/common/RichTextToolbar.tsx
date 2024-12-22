@@ -1,31 +1,44 @@
 import { WandSparkles, Image, Bold, Type, Italic, CaseUpper } from "lucide-react"
 import { Toolbar, ToolbarAction, ToolbarContent, ToolbarDivider } from "./Toolbar"
 
+type RichTextToolbarActions = {
+    onAITextAction: () => void;
+    onAIImageAction: () => void;
+    onHeaderTypeAction: () => void;
+    onSubheaderTypeAction: () => void;
+    onBoldAction: () => void;
+    onUppercaseAction: () => void;
+    onItalicAction: () => void;
+}
 
-export const RichTextToolbar = () => {
+interface RichTextToolbarProps extends RichTextToolbarActions {
+    classNames?: string;
+}
+
+export const RichTextToolbar: React.FC<RichTextToolbarProps> = ({...props}) => {
     return (
-        <Toolbar>
+        <Toolbar classNames={props.classNames}>
             <ToolbarContent>
-                <ToolbarAction onClick={()=>alert('italisize')}>
+                <ToolbarAction onClick={props.onAITextAction}>
                     <WandSparkles width={20} height={20} strokeWidth={1.25}/>
                 </ToolbarAction>
-                <ToolbarAction onClick={()=>alert('italisize')}>
+                <ToolbarAction onClick={props.onAIImageAction}>
                     <Image width={20} height={20} strokeWidth={1.25}/>
                 </ToolbarAction>
                 <ToolbarDivider />
-                <ToolbarAction onClick={()=>alert('italisize')}>
+                <ToolbarAction onClick={props.onHeaderTypeAction}>
                     <Type width={20} height={20} />
                 </ToolbarAction>
-                <ToolbarAction onClick={()=>alert('italisize')}>
+                <ToolbarAction onClick={props.onSubheaderTypeAction}>
                     <Type width={16} height={16} />
                 </ToolbarAction>
-                <ToolbarAction onClick={()=>alert('bolden')}>
+                <ToolbarAction onClick={props.onBoldAction}>
                     <Bold width={20} height={20} />
                 </ToolbarAction>
-                <ToolbarAction onClick={()=>alert('italisize')}>
+                <ToolbarAction onClick={props.onItalicAction}>
                     <Italic width={20} height={20} />
                 </ToolbarAction>
-                <ToolbarAction onClick={()=>alert('italisize')}>
+                <ToolbarAction onClick={props.onUppercaseAction}>
                     <CaseUpper width={30} height={30} strokeWidth={1.25} />
                 </ToolbarAction>
             </ToolbarContent>

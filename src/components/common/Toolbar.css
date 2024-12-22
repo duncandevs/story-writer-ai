@@ -3,11 +3,13 @@
     height: 57px;
     background-color: var(--color-amber-200);
     border-radius: 16px;
-    padding: 12px;
 }
 
 .ToolbarContent {
+    padding: 12px;
+    height: inherit;
     margin: auto;
+    align-items: center;
     justify-content: space-around;
 }
 
@@ -22,8 +24,7 @@
 
 .ToolbarDivider {
     display: inline-block; 
-    height: auto;
+    height: 100%;
     width: 1.5px;
-    background-color:var(--color-divider-gray);
-    margin: 0 10px;
+    background-color: var(--color-divider-gray);
 }
