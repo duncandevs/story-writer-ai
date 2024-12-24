@@ -1,7 +1,7 @@
 import { WandSparkles, Image, Bold, Type, Italic, CaseUpper } from "lucide-react"
 import { Toolbar, ToolbarAction, ToolbarContent, ToolbarDivider } from "./Toolbar"
 
-type RichTextToolbarActions = {
+type RichTextToolbarUIActions = {
     onAITextAction: () => void;
     onAIImageAction: () => void;
     onHeaderTypeAction: () => void;
@@ -11,11 +11,11 @@ type RichTextToolbarActions = {
     onItalicAction: () => void;
 }
 
-interface RichTextToolbarProps extends RichTextToolbarActions {
+interface RichTextToolbarUIProps extends RichTextToolbarUIActions {
     classNames?: string;
 }
 
-export const RichTextToolbar: React.FC<RichTextToolbarProps> = ({...props}) => {
+export const RichTextToolbarUI: React.FC<RichTextToolbarUIProps> = ({...props}) => {
     return (
         <Toolbar classNames={props.classNames}>
             <ToolbarContent>

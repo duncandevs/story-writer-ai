@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import { Card } from "@/components/ui/card";
-import React, { useMemo } from "react";
+import React, { CSSProperties, useMemo } from "react";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { HeadingNode } from "@lexical/rich-text";
 
@@ -10,26 +10,44 @@ import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
-import { cn } from "./utils";
 import { css } from "@emotion/css";
 
-import { ImagePlugin } from "./plugins/ImagePlugin";
-// import CustomOnChangePlugin from "./Plugins/CustomOnChangePlugin";
 import { ListNode, ListItemNode } from "@lexical/list";
 import { TableNode, TableCellNode, TableRowNode } from "@lexical/table";
 import { CodeNode, CodeHighlightNode } from "@lexical/code";
 import { ImageNode } from "./nodes/ImageNode";
 import { ToolbarPlugin } from "./plugins/ToolbarPlugin";
+import StreamTextPlugin from "./plugins/StreamAITextPlugin";
+
 
 interface RichTextEditorProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
   name: string;
-}
+};
+
+const toolbarStyles: CSSProperties = {
+    position: 'fixed', 
+    left: 0, 
+    right: 0, 
+    bottom: '20%',
+    marginInline: 'auto', 
+    width: "fit-content",
+};
+
+const editorContentStyles = {
+    fontSize: 22,
+    padding: 16,
+    outline: "none",
+    margin: 'auto',
+    maxWidth: 'var(--default-editor-width)',
+    color: 'var(--color-forest-green)',
+    paddingBottom: 200,
+};
 
 export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
-  function RichTextEditor({ value, onChange, placeholder, name }) {
+  function RichTextEditor({ placeholder, name }) {
     const initialConfig = useMemo(
       () => ({
         namespace: name,
@@ -54,15 +72,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
             <RichTextPlugin
               contentEditable={
                 <ContentEditable
-                  className={css({
-                    height: `inherit`,
-                    fontSize: 22,
-                    padding: 8,
-                    overflow: "auto",
-                    outline: "none",
-                    border: "1px solid black",
-                    borderRadius: "4px",
-                  })}
+                  className={css(editorContentStyles)}
                 />
               }
               placeholder={
@@ -83,15 +93,8 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
           <AutoFocusPlugin />
           <HistoryPlugin />
           <ListPlugin />
-          {/* <CustomOnChangePlugin value={value} onChange={onChange} /> */}
-          <div style={{
-                position: 'absolute', 
-                left: 0, 
-                right: 0, 
-                bottom: '24%',
-                marginInline: 'auto', 
-                width: "fit-content",
-        }}><ToolbarPlugin /></div>
+          <StreamTextPlugin />
+          <div style={toolbarStyles}><ToolbarPlugin /></div>
         </LexicalComposer>
     );
   }

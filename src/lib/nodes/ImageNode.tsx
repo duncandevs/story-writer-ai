@@ -9,7 +9,7 @@ import {
   export const $createImageNode = ({
     alt,
     height,
-    maxWidth = 400,
+    maxWidth = 800,
     src,
     width,
   }: {
@@ -17,7 +17,7 @@ import {
     height?: number;
     maxWidth?: number;
     src: string;
-    width?: number;
+    width?: number | string;
   }) => {
     return new ImageNode({ alt, height, maxWidth, src, width });
   };
@@ -35,7 +35,7 @@ import {
     __src: string;
     __alt: string;
     __height: "inherit" | number;
-    __width: "inherit" | number;
+    __width: "inherit" | number | string;
     __maxWidth: number;
   
     constructor({
@@ -49,7 +49,7 @@ import {
       src: string;
       alt: string;
       maxWidth: number;
-      width?: "inherit" | number;
+      width?: "inherit" | number | string;
       height?: "inherit" | number;
       key?: NodeKey;
     }) {
@@ -84,6 +84,9 @@ import {
             width: this.__width,
             height: this.__height,
             maxWidth: this.__maxWidth,
+            margin: "auto",
+            marginTop: 16,
+            marginBottom: 16,
           }}
         />
       );

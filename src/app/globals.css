@@ -7,6 +7,7 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #FAF4EC;
 }
 
 @layer base {
@@ -37,6 +38,7 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
     --font-roboto: Roboto, sans-serif;
+    --default-editor-width: 824px;
   }
   .dark {
     --background: 222.2 84% 4.9%;

@@ -7,8 +7,8 @@ import {
   $isTextNode,
   TextNode
 } from "lexical";
-import { RichTextAction } from "@/contants";
-import { RichTextToolbar } from "@/components/common/RichTextToolbar";
+import { RichTextAction } from "@/constants";
+import { RichTextToolbarUI } from "@/components/common/RichTextToolbarUI";
 import { $createImageNode } from "../nodes/ImageNode";
 import { $insertNodes } from "lexical";
 
@@ -103,9 +103,9 @@ export function ToolbarPlugin() {
   };
 
   const onAddImage = () => {
-    let src = "https://images.unsplash.com/photo-1727261909598-ce67f083f858?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    let src = "https://image.lexica.art/full_webp/29d41c95-42cf-428d-aefa-0c1405e371b6"
     editor.update(() => {
-      const node = $createImageNode({ src, alt: "Dummy text" });
+      const node = $createImageNode({ src, alt: "Dummy text", width: 1000 });
       $insertNodes([node]);
     });
   };
@@ -120,7 +120,7 @@ export function ToolbarPlugin() {
 
   return (
     <div className="flex gap-4">
-      <RichTextToolbar 
+      <RichTextToolbarUI 
         onAIImageAction={onAddImage}
         onAITextAction={()=>null}
         onUppercaseAction={applyUppercase}

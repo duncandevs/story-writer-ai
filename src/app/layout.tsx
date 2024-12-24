@@ -12,11 +12,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const roboto = Abhaya_Libre({
+const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin"],
   weight: ["400", "700"], // Include desired font weights
 });
+
+const abhayaLibre = Abhaya_Libre({
+  variable: "--font-abhaya-libre",
+  subsets: ["latin"],
+  weight: ["400", "700"], // Include desired font weights
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -31,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${abhayaLibre.variable} antialiased`}
       >
         {children}
       </body>

@@ -12,11 +12,7 @@ export function ImagePlugin() {
   const [editor] = useLexicalComposerContext();
 
   const onAddImage = () => {
-    // let src = "";
-    // if (url) src = url;
-    // if (file) src = URL.createObjectURL(file);
-    let src = "https://www.billboard.com/wp-content/uploads/2024/11/J-Cole-2024-Dreamville-Music-Festival-89-billboard-1548.jpg?w=942&h=623&crop=1"
-
+    let src = "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*MS67Ky6tkFjmIVNq"
     editor.update(() => {
       const node = $createImageNode({ src, alt: "Dummy text" });
       $insertNodes([node]);

@@ -8,3 +8,8 @@
     font-size: 48px;
     font-weight: bold;
 }
+
+.abhayaLibre {
+    font-family: var(--font-abhaya-libre);
+    font-weight: 400;
+}

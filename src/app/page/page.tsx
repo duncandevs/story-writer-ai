@@ -1,11 +1,11 @@
 "use client"
 import './page.css';
 import { RichTextEditor } from "@/lib/RichTextEditor";
-import { RichTextToolbar } from '@/components/common/RichTextToolbar';
+import './page.css';
 
 export default function RichText () {
     return (
-        <div className='container' style={{height: window.innerHeight}}>
+        <div className='abhayaLibre' style={{maxHeight: 1600, minHeight: window.innerHeight}}>
             <div style={{height: window.innerHeight * 0.9}}>
                 <RichTextEditor 
                     value="value"
