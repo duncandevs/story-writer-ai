@@ -1,6 +1,10 @@
 import { together, TogetherImageResponseData } from ".";
 
-async function createImageFromPrompt (prompt: string): Promise<TogetherImageResponseData> {
+type CreateImageFromPromptResponse = {
+    data: TogetherImageResponseData,
+    imageSource: string | null;
+}
+async function createImageFromPrompt (prompt: string): Promise<CreateImageFromPromptResponse> {
     const response = await together.images.create({
         model: "black-forest-labs/FLUX.1-schnell",
         prompt: prompt,
@@ -10,7 +14,11 @@ async function createImageFromPrompt (prompt: string): Promise<TogetherImageResp
         n: 2,
         response_format: "base64",
     });
-    return response?.data[0]
+    let data = response?.data[0];
+    return {
+        data,
+        imageSource: data ? `data:image/png;base64,${data.b64_json}` : null
+    }
 };
 
 export default createImageFromPrompt;

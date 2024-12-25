@@ -12,6 +12,11 @@ import { RichTextToolbarUI } from "@/components/common/RichTextToolbarUI";
 import { $createImageNode } from "../nodes/ImageNode";
 import { $insertNodes } from "lexical";
 
+interface ToolbarProps {
+    handleImageClick: () => void;
+    handlePromptClick: () => void;
+}
+
 
 const _mergeNodeStyle = (node: TextNode, styles = {}) => {
     // Get existing styles from the node
@@ -44,10 +49,10 @@ const _mergeNodeStyle = (node: TextNode, styles = {}) => {
   
     // Set the new style string to the node
     node.setStyle(newStyleString);
-  };
+};
   
 
-export function ToolbarPlugin() {
+export const ToolbarPlugin: React.FC<ToolbarProps> = ({ handlePromptClick, handleImageClick }) => {
   const [editor] = useLexicalComposerContext();
   const [selectionMap, setSelectionMap] = useState<{ [key: string]: boolean }>(
     {}
@@ -121,8 +126,8 @@ export function ToolbarPlugin() {
   return (
     <div className="flex gap-4">
       <RichTextToolbarUI 
-        onAIImageAction={onAddImage}
-        onAITextAction={()=>null}
+        onAIImageAction={handleImageClick}
+        onAITextAction={handlePromptClick}
         onUppercaseAction={applyUppercase}
         onBoldAction={() => toggleStyle("bold")}
         onItalicAction={() => toggleStyle("italic")}
