@@ -12,12 +12,12 @@ type RichTextToolbarUIActions = {
 }
 
 interface RichTextToolbarUIProps extends RichTextToolbarUIActions {
-    classNames?: string;
+    className?: string;
 }
 
 export const RichTextToolbarUI: React.FC<RichTextToolbarUIProps> = ({...props}) => {
     return (
-        <Toolbar>
+        <Toolbar className={props.className}>
             <ToolbarContent>
                 <ToolbarAction onClick={props.onAITextAction}>
                     <WandSparkles width={20} height={20} strokeWidth={1.25}/>

@@ -18,8 +18,6 @@ import { TableNode, TableCellNode, TableRowNode } from "@lexical/table";
 import { CodeNode, CodeHighlightNode } from "@lexical/code";
 import { ImageNode } from "./nodes/ImageNode";
 import { ToolbarPlugin } from "./plugins/ToolbarPlugin";
-import StreamTextPlugin from "./plugins/StreamAITextPlugin";
-import ImagePlugin from "./plugins/ImagePlugin";
 
 
 interface RichTextEditorProps {
@@ -29,15 +27,6 @@ interface RichTextEditorProps {
   name: string;
 };
 
-const toolbarStyles: CSSProperties = {
-    position: 'fixed', 
-    left: 0, 
-    right: 0, 
-    bottom: '20%',
-    marginInline: 'auto', 
-    width: "fit-content",
-};
-
 const editorContentStyles = {
     fontSize: 22,
     padding: 16,
@@ -45,7 +34,7 @@ const editorContentStyles = {
     margin: 'auto',
     maxWidth: 'var(--default-editor-width)',
     color: 'var(--color-forest-green)',
-    paddingBottom: 200,
+    paddingBottom: 400,
 };
 
 export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
@@ -69,22 +58,8 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
       [name]
     );
 
-    const [msgs, setMsgs] = useState<string[]>([])
-    const [imagePrompt, setImagePrompt] = useState<string>();
-
-    const onTextPrompt = () => {
-      let userMessages = prompt('enter text')
-      if(userMessages) setMsgs([userMessages])
-    }
-
-    const onImagePrompt = () => {
-      let iprompt = prompt('enter text')
-      if(iprompt) setImagePrompt(iprompt)
-    }
-    console.log('userMessages: ', msgs)
     return (
         <LexicalComposer initialConfig={initialConfig}>
-            <ImagePlugin prompt={imagePrompt} />
             <RichTextPlugin
               contentEditable={
                 <ContentEditable
@@ -109,8 +84,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
           <AutoFocusPlugin />
           <HistoryPlugin />
           <ListPlugin />
-          <StreamTextPlugin userMessages={msgs} options={{}}/>
-          <div style={toolbarStyles}><ToolbarPlugin handlePromptClick={onTextPrompt} handleImageClick={onImagePrompt} /></div>
+          <ToolbarPlugin />
         </LexicalComposer>
     );
   }

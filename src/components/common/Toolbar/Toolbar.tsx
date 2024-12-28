@@ -5,12 +5,12 @@ import './Toolbar.css';
 
 interface ToolbarProps {
     children: React.ReactNode;
-    classNames?: string
+    className?: string
 };
 
 interface ToolbarContentProps {
     children: React.ReactNode;
-    classNames?: string
+    className?: string
 };
 
 interface ToolbarActionProps {
@@ -19,11 +19,11 @@ interface ToolbarActionProps {
 };
 
 export const Toolbar: React.FC<ToolbarProps> = ({ ...props }) => (
-    <div {...props} className={cn("Toolbar", props.classNames)}/>
+    <div {...props} className={cn("Toolbar", props.className)}/>
 );
 
 export const ToolbarContent: React.FC<ToolbarContentProps> = ({ ...props }) => (
-    <div {...props} className={cn("ToolbarContent flex space-x-5", props.classNames)}/>
+    <div {...props} className={cn("ToolbarContent flex space-x-5", props.className)}/>
 );
 
 export const ToolbarAction: React.FC<ToolbarActionProps> = ({ ...props }) => (

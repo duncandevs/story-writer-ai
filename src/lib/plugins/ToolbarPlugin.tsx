@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {
   $getSelection,
@@ -11,11 +11,32 @@ import { RichTextAction } from "@/constants";
 import { RichTextToolbarUI } from "@/components/common/RichTextToolbarUI";
 import { $createImageNode } from "../nodes/ImageNode";
 import { $insertNodes } from "lexical";
+import { ImagePromptArea } from "@/components/common/ImagePromptArea";
+import StreamTextPlugin from "./StreamAITextPlugin";
+import ImagePlugin from "./ImagePlugin";
+import { TextPromptArea } from "@/components/common/TextPromptArea";
+import { cn } from "../utils";
+import { css } from "@emotion/css";
 
 interface ToolbarProps {
-    handleImageClick: () => void;
-    handlePromptClick: () => void;
+    className?: string;
 }
+
+const toolbarStyles: CSSProperties = {
+    position: 'fixed', 
+    left: 0, 
+    right: 0, 
+    bottom: '10%',
+    marginInline: 'auto', 
+    width: "fit-content",
+};
+
+const promptAreaStyles: CSSProperties = {
+  position: 'fixed', 
+  left: 0, 
+  right: 0, 
+  bottom: '8%',
+};
 
 
 const _mergeNodeStyle = (node: TextNode, styles = {}) => {
@@ -52,7 +73,7 @@ const _mergeNodeStyle = (node: TextNode, styles = {}) => {
 };
   
 
-export const ToolbarPlugin: React.FC<ToolbarProps> = ({ handlePromptClick, handleImageClick }) => {
+export const ToolbarPlugin: React.FC<ToolbarProps> = ({ className }) => {
   const [editor] = useLexicalComposerContext();
   const [selectionMap, setSelectionMap] = useState<{ [key: string]: boolean }>(
     {}
@@ -123,17 +144,40 @@ export const ToolbarPlugin: React.FC<ToolbarProps> = ({ handlePromptClick, handl
     });
   }, [editor]);
 
+  const [msgs, setMsgs] = useState<string[]>([])
+  const [imagePrompt, setImagePrompt] = useState<string>();
+  const [activePromptArea, setActivePromptArea] = useState<"text" | "image" | null>(null);
+
+  const toggleImagePrompt = () => setActivePromptArea("image");
+  const toggleTextPrompt = () => setActivePromptArea("text");
+  const onRemovePromptArea = () => setActivePromptArea(null);
+
   return (
-    <div className="flex gap-4">
-      <RichTextToolbarUI 
-        onAIImageAction={handleImageClick}
-        onAITextAction={handlePromptClick}
-        onUppercaseAction={applyUppercase}
-        onBoldAction={() => toggleStyle("bold")}
-        onItalicAction={() => toggleStyle("italic")}
-        onHeaderTypeAction={() => applyFontSize("40px")}
-        onSubheaderTypeAction={() => applyFontSize("32px")}
-      />
+    <div >
+        {activePromptArea === null && 
+            <RichTextToolbarUI 
+                className={cn(className, css({...toolbarStyles}))}
+                onAIImageAction={toggleImagePrompt}
+                onAITextAction={toggleTextPrompt}
+                onUppercaseAction={applyUppercase}
+                onBoldAction={() => toggleStyle("bold")}
+                onItalicAction={() => toggleStyle("italic")}
+                onHeaderTypeAction={() => applyFontSize("40px")}
+                onSubheaderTypeAction={() => applyFontSize("32px")}
+            />
+        }
+        {activePromptArea === "image" && 
+            <div className={css({...promptAreaStyles})}>
+                <ImagePromptArea onSubmit={(prompt:string) => setImagePrompt(prompt)} onBack={onRemovePromptArea}/>
+            </div>
+        }
+        {activePromptArea === "text" && 
+            <div className={css({...promptAreaStyles})}>
+                <TextPromptArea onSubmit={(prompt:string) => setMsgs([prompt])} onBack={onRemovePromptArea}/>
+            </div>
+        }
+        <ImagePlugin prompt={imagePrompt} />
+        <StreamTextPlugin userMessages={msgs} options={{}}/>
     </div>
   );
 }

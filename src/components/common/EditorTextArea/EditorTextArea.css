@@ -1,0 +1,37 @@
+.EditorTextarea {
+    width: 100%; /* Take up full width of the parent/container */
+    max-width: 824px; /* Limit the width to a maximum of 824px */
+    min-height: 152px;
+    height: fit-content;
+    margin: 0 auto; /* Center the div horizontally */
+    padding: 16px; /* Optional: Add some padding for inner spacing */
+    background-color: var(--color-amber-300);
+    border-radius: 16px;
+    font-family: roboto;
+    border: 1px solid var(--color-amber-100);
+}
+
+.EditorTextareaField {
+    width: 100%;
+    max-width: 824px;
+    min-height: 100px;
+    max-height: 304px;
+    margin: 0 auto; 
+    padding: 8px; 
+    background-color: inherit;
+    outline: none;
+}
+
+.EditorTextareaTools {
+    display: flex;
+    margin-top: 8px;
+    padding: 8px;
+}
+
+.EditorTextareaLeftContent {
+    margin-right: auto;
+}
+
+.EditorTextareaRightContent {
+    margin-left: auto;
+}
