@@ -13,3 +13,14 @@
     font-family: var(--font-abhaya-libre);
     font-weight: 400;
 }
+
+.EditorTitle {
+    display: flex;
+    margin: auto;
+    width: var(--default-editor-width);
+    padding: 16px;
+    font-size: 40;
+    font-weight: 600;
+    background: none;
+    outline: none;
+}
