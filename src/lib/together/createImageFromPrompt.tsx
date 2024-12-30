@@ -6,7 +6,7 @@ type CreateImageFromPromptResponse = {
 }
 async function createImageFromPrompt (prompt: string): Promise<CreateImageFromPromptResponse> {
     const response = await together.images.create({
-        model: "black-forest-labs/FLUX.1-schnell",
+        model: "black-forest-labs/FLUX.1-dev",
         prompt: prompt,
         width: 1024,
         height: 768,
