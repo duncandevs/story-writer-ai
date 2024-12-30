@@ -70,7 +70,17 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		keyframes: {
+			spreadAndTilt: {
+			  '0%': { transform: 'translateX(0) rotate(0deg)' },
+			  '50%': { transform: 'translateX(20px) rotate(0deg)' },
+			//   '100%': { transform: 'translateX(20px) rotate(20deg)' },
+			},
+		},
+		animation: {
+			spreadAndTilt: 'spreadAndTilt 1s ease-in-out',
+		},
   	}
   },
   plugins: [require("tailwindcss-animate")],
