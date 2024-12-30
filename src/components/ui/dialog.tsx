@@ -1,7 +1,7 @@
 import React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { cn } from "@/lib/utils";
-import '@/styles/ui/dialog.css';
+import '@/components/ui/styles/dialog.css';
 
 
 export const DialogRoot = DialogPrimitive.Root;

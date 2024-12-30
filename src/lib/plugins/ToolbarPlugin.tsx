@@ -153,7 +153,7 @@ export const ToolbarPlugin: React.FC<ToolbarProps> = ({ className }) => {
   const onRemovePromptArea = () => setActivePromptArea(null);
 
   return (
-    <div >
+    <div>
         {activePromptArea === null && 
             <RichTextToolbarUI 
                 className={cn(className, css({...toolbarStyles}))}

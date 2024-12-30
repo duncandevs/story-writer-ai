@@ -1,0 +1,136 @@
+#core-avatar {
+    display: grid;
+    grid-template-areas: "avatar";
+}
+:where(#core-avatar) {
+    .avatar-root {
+        position: relative;
+        grid-area: avatar;
+        display: inline-block;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+        overflow: hidden;
+        user-select: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 100%;
+        background-color: var(--color-amber-200);
+        z-index: 1;
+    }
+
+    .avatar-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: inherit;
+    }
+
+    .avatar-fallback {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px !important;
+        line-height: 1;
+        font-weight: 500;
+        font-size: 16px;
+        color: var(--color-black);
+    }
+
+    .status-dot {
+        grid-area: avatar;
+        justify-self: end;
+        align-self: end;
+        width: 12px;
+        height: 12px;
+        background-color: green;
+        border-radius: 50%;
+        border: 2px solid white;
+        margin-bottom: -4px;
+        margin-right: -4px;
+        z-index: 2;
+    }
+
+    /* SIZE */
+    .avatar-root.size-xs {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .avatar-root.size-sm {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .avatar-root.size-md {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .avatar-root.size-lg {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .avatar-root.size-xl {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .avatar-root.size-2xl {
+        width: 64px;
+        height: 64px;
+    }
+    
+    .avatar-root.size-3xl {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .avatar-root.size-4xl {
+        width: 96px;
+        height: 96px;
+    }
+
+    .status-dot.size-xs {
+        width: 8px;
+        height: 8px;
+    }
+
+    .status-dot.size-sm {
+        width: 10px;
+        height: 10px;
+    }
+
+    .status-dot.size-md {
+        width: 12px;
+        height: 12px;
+    }
+
+    .status-dot.size-lg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .status-dot.size-xl {
+        width: 16px;
+        height: 16px;
+    }
+
+    .status-dot.size-2xl {
+        width: 18px;
+        height: 18px;
+    }
+
+    .status-dot.size-3xl {
+        width: 20px;
+        height: 20px;
+    }
+
+    .status-dot.size-4xl {
+        width: 22px;
+        height: 22px;
+    }
+}
