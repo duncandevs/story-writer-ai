@@ -1,0 +1,69 @@
+@import './variables.css';
+
+.DialogOverlay {
+	background-color: rgb(0, 0, 0);
+    opacity: 0.7;
+	position: fixed;
+	inset: 0;
+	animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.DialogContent {
+	background-color: grey;
+    /* border: 1.5px solid var(--color-amber-100); */
+	border-radius: 6px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 90vw;
+	max-width: 100%;
+	max-height: 85vh;
+	padding: 25px;
+	animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.DialogContent:focus {
+	outline: none;
+}
+
+.DialogTitle {
+	margin: 0;
+	font-weight: 500;
+	color: black;
+	font-size: 17px;
+}
+
+.DialogDescription {
+	margin: 10px 0 20px;
+	font-size: 15px;
+	line-height: 1.5;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.dialog-description-text {
+	color: #6D717F;
+}
+
+@keyframes overlayShow {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes contentShow {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -48%) scale(0.96);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
