@@ -22,13 +22,16 @@ interface ToolbarProps {
     className?: string;
 }
 
+const toolbarContainerStyles: CSSProperties = {
+  flexShrink: 0, /* Prevent shrinking */
+  position: 'fixed',
+  bottom: 100,
+  left: 0,
+  right: 0,
+};
+
 const toolbarStyles: CSSProperties = {
-    position: 'fixed', 
-    left: 0, 
-    right: 0, 
-    bottom: '10%',
-    marginInline: 'auto', 
-    width: "fit-content",
+    margin: 'auto',
 };
 
 const promptAreaStyles: CSSProperties = {
@@ -38,6 +41,11 @@ const promptAreaStyles: CSSProperties = {
   bottom: '8%',
 };
 
+const mainContent: CSSProperties = {
+  flexGrow: 1, /* Take up all remaining space */
+  display: 'flex',
+  flexDirection: 'column',
+}
 
 const _mergeNodeStyle = (node: TextNode, styles = {}) => {
     // Get existing styles from the node
@@ -153,8 +161,9 @@ export const ToolbarPlugin: React.FC<ToolbarProps> = ({ className }) => {
   const onRemovePromptArea = () => setActivePromptArea(null);
 
   return (
-    <div>
+    <div className={css({...mainContent})}>
         {activePromptArea === null && 
+          <div className={css({...toolbarContainerStyles})}>
             <RichTextToolbarUI 
                 className={cn(className, css({...toolbarStyles}))}
                 onAIImageAction={toggleImagePrompt}
@@ -165,14 +174,15 @@ export const ToolbarPlugin: React.FC<ToolbarProps> = ({ className }) => {
                 onHeaderTypeAction={() => applyFontSize("40px")}
                 onSubheaderTypeAction={() => applyFontSize("32px")}
             />
+          </div>
         }
         {activePromptArea === "image" && 
-            <div className={css({...promptAreaStyles})}>
+            <div className={css({...toolbarContainerStyles, ...promptAreaStyles})}>
                 <ImagePromptArea onSubmit={(prompt:string) => setImagePrompt(prompt)} onBack={onRemovePromptArea}/>
             </div>
         }
         {activePromptArea === "text" && 
-            <div className={css({...promptAreaStyles})}>
+            <div className={css({...toolbarContainerStyles, ...promptAreaStyles})}>
                 <TextPromptArea onSubmit={(prompt:string) => setMsgs([prompt])} onBack={onRemovePromptArea}/>
             </div>
         }
