@@ -7,6 +7,8 @@ import { EllipsisVertical, HomeIcon, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Avatar from '@/components/ui/avatar';
+import { cn } from '@/lib/utils';
+import { ChaptersDrawerList } from '@/components/editor/ChaptersDrawerList';
 
 export default function RichText () {
     const [drawerActive, setDrawerActive] = useState(false);
@@ -19,9 +21,12 @@ export default function RichText () {
                     <div className={`transition-all duration-300 ${
                         drawerActive ? "w-[300px]" : "w-[60px]"
                         } h-[200px]`}>
-                        <>{drawerActive && <div className='p-4'>
-                            <p>Drawer Item One</p>    
-                        </div>}</>
+                        <div className={cn(
+                            'p-4 opacity-0 transition-all duration-500',
+                            `${drawerActive ? 'opacity-100': 'duration-0'}`
+                        )}>
+                            <ChaptersDrawerList />
+                        </div>
                     </div>
                 </div>
                 <div className='w-full'>

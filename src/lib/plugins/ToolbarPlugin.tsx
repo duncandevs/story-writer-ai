@@ -14,7 +14,7 @@ import { $insertNodes } from "lexical";
 import { ImagePromptArea } from "@/components/common/ImagePromptArea";
 import StreamTextPlugin from "./StreamAITextPlugin";
 import ImagePlugin from "./ImagePlugin";
-import { TextPromptArea } from "@/components/common/TextPromptArea";
+import { TextPromptArea } from "@/components/editor/TextPromptArea";
 import { cn } from "../utils";
 import { css } from "@emotion/css";
 
