@@ -8,10 +8,10 @@ import {
   TextNode
 } from "lexical";
 import { RichTextAction } from "@/constants";
-import { RichTextToolbarUI } from "@/components/common/RichTextToolbarUI";
+import { RichTextToolbarUI } from "@/components/editor/RichTextToolbarUI";
 import { $createImageNode } from "../nodes/ImageNode";
 import { $insertNodes } from "lexical";
-import { ImagePromptArea } from "@/components/common/ImagePromptArea";
+import { ImagePromptArea } from "@/components/editor/ImagePromptArea";
 import StreamTextPlugin from "./StreamAITextPlugin";
 import ImagePlugin from "./ImagePlugin";
 import { TextPromptArea } from "@/components/editor/TextPromptArea";

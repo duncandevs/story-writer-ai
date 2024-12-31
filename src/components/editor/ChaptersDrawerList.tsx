@@ -1,24 +1,29 @@
+import { ChevronDown } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
+
 export const ChaptersDrawerList = () => (
-    <ul className='ChapterList flex flex-col gap-4'>
-        <li>
-            <p>Chapter 1</p>
-            <ul className='PageList flex flex-col p-2 gap-4'>
+            <ul className='ChapterList flex flex-col gap-4'>
                 <li>
-                    <p>page one</p>
+                    <Collapsible>
+                        <CollapsibleTrigger className="w-full">
+                            <div className="flex w-full justify-between hover:bg-amber-200 p-2 rounded-md">
+                                <p>Chapter One</p>
+                            </div>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent>
+                            <ul className='PageList flex flex-col p-4 gap-4'>
+                                <li>
+                                    <p>page one</p>
+                                </li>
+                                <li>
+                                    <p>page two</p>
+                                </li>
+                                <li>
+                                    <p>page three</p>
+                                </li>
+                            </ul>
+                        </CollapsibleContent>
+                    </Collapsible>
                 </li>
-                <li>
-                    <p>page two</p>
-                </li>
-                <li>
-                    <p>page three</p>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <p>Chapter 2</p>
-        </li>
-        <li>
-            <p>Chapter 3</p>
-        </li>
-    </ul> 
+            </ul> 
 )
