@@ -18,6 +18,9 @@ import { TableNode, TableCellNode, TableRowNode } from "@lexical/table";
 import { CodeNode, CodeHighlightNode } from "@lexical/code";
 import { ImageNode } from "./nodes/ImageNode";
 import { ToolbarPlugin } from "./plugins/ToolbarPlugin";
+import { $getRoot, $getSelection, LexicalEditor } from 'lexical';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { SavePlugin } from "./plugins/SavePlugin";
 
 
 interface RichTextEditorProps {
@@ -57,7 +60,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
       }),
       [name]
     );
-
+    
     return (
         <LexicalComposer initialConfig={initialConfig}>
             <RichTextPlugin
@@ -85,6 +88,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
           <HistoryPlugin />
           <ListPlugin />
           <ToolbarPlugin />
+          <SavePlugin />
         </LexicalComposer>
     );
   }

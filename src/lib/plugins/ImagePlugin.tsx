@@ -12,7 +12,7 @@ interface ImagePluginProps {
 const ImagePlugin: React.FC<ImagePluginProps> = ({ prompt, width=800}) => {
   const [editor] = useLexicalComposerContext();
   const [src, setImageSource] = React.useState<string>();
-  
+
   useEffect(()=>{
     if(prompt) createImageFromPrompt(prompt).then(({ imageSource }) => {
       if(!imageSource) return null;

@@ -152,6 +152,13 @@ export const ToolbarPlugin: React.FC<ToolbarProps> = ({ className }) => {
     });
   }, [editor]);
 
+  function serializeEditorStateToJson(): string {
+    const editorState = editor.getEditorState();
+    const json = editorState.toJSON();
+    console.log('SAVED LEXICAL STATE: ', JSON.stringify(json))
+    return JSON.stringify(json);
+  };
+
   const [msgs, setMsgs] = useState<string[]>([])
   const [imagePrompt, setImagePrompt] = useState<string>();
   const [activePromptArea, setActivePromptArea] = useState<"text" | "image" | null>(null);
@@ -188,6 +195,7 @@ export const ToolbarPlugin: React.FC<ToolbarProps> = ({ className }) => {
         }
         <ImagePlugin prompt={imagePrompt} />
         <StreamTextPlugin userMessages={msgs} options={{}}/>
+        <button onClick={serializeEditorStateToJson}>Save</button>
     </div>
   );
 }
