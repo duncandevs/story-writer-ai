@@ -1,10 +1,19 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { LexicalEditor, createEditor } from "lexical";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const SavePlugin = () => {
     const [editor] = useLexicalComposerContext();
+    const [editorState, setEditorState] = useState(null);
+    const [editorStateLoadingIsFinished, setEditorStateLoadingIsFinished] = useState(false);
     
+    _loadEditorSavedState(editor).then((res) => {
+        setEditorState(editorState);
+        setEditorStateLoadingIsFinished(true)
+    }).catch((err)=>{
+        setEditorStateLoadingIsFinished(true);
+    });
+
     useEffect(() => {
         // Register an update listener that gets called on every editor state change
         const removeUpdateListener = editor.registerUpdateListener(() => {
@@ -29,13 +38,12 @@ function _serializeAndSaveEditorStateToJson(editor: LexicalEditor): string {
     return jsonState;
 };
 
-export function _loadEditorSavedState(editor: LexicalEditor){
+async function _loadEditorSavedState(editor: LexicalEditor){
         // Retrieve the serialized state from localStorage
         const serializedState = localStorage.getItem('editorState');
         if (serializedState) {
-            // Parse the serialized state back into an object
             const parsedState = JSON.parse(serializedState);
-            // Use Lexical's API to set the editor's state
-            // editor.setEditorState((state = editor._editorState)=>state.);
-        }
-}
+            return parsedState
+        };
+        return null;
+};
