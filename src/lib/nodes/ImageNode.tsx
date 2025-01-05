@@ -31,6 +31,8 @@ import {
     return null;
   };
   
+  const IMAGE_NODE_TYPE = "image_node";
+
   export class ImageNode extends DecoratorNode<React.ReactNode> {
     __src: string;
     __alt: string;
@@ -62,7 +64,7 @@ import {
     }
   
     static getType(): string {
-      return "image";
+      return IMAGE_NODE_TYPE;
     }
   
     static clone(_node: ImageNode): ImageNode {
@@ -104,6 +106,18 @@ import {
   
       return { element: image };
     }
+
+    exportJSON() {
+      return {
+        type: IMAGE_NODE_TYPE,
+        version: 1,
+        src: this.__src,
+        alt: this.__alt,
+        height: this.__height,
+        width: this.__width,
+        maxWidth: this.__maxWidth,
+      };
+    }
   
     static importDOM(): DOMConversionMap | null {
       return {
@@ -111,5 +125,10 @@ import {
           return { conversion: convertImageElement, priority: 0 };
         },
       };
+    }
+
+    static importJSON(serializedNode: any): ImageNode {
+      const { src, alt, height, width, maxWidth } = serializedNode;
+      return $createImageNode({ src, alt, height, width, maxWidth });
     }
   }

@@ -10,7 +10,6 @@ import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
-import { copyToClipboard } from "@lexical/clipboard"; //TODO: implement the copytoClipboard fn
 import { css } from "@emotion/css";
 
 import { ListNode, ListItemNode } from "@lexical/list";
@@ -18,9 +17,8 @@ import { TableNode, TableCellNode, TableRowNode } from "@lexical/table";
 import { CodeNode, CodeHighlightNode } from "@lexical/code";
 import { ImageNode } from "./nodes/ImageNode";
 import { ToolbarPlugin } from "./plugins/ToolbarPlugin";
-import { $getRoot, $getSelection, LexicalEditor } from 'lexical';
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { SavePlugin } from "./plugins/SavePlugin";
+import { SavePlugin, loadEditorSavedState } from "./plugins/SavePlugin";
+import { PaginationPlugin } from "./plugins/PaginationPlugin";
 
 
 interface RichTextEditorProps {
@@ -40,10 +38,13 @@ const editorContentStyles = {
     paddingBottom: 400,
 };
 
+const initialEditorState = await loadEditorSavedState();
+
 export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
   function RichTextEditor({ placeholder, name }) {
     const initialConfig = useMemo(
       () => ({
+        editorState: initialEditorState,
         namespace: name,
         onError: () => {},
         nodes: [
@@ -89,6 +90,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
           <ListPlugin />
           <ToolbarPlugin />
           <SavePlugin />
+          <PaginationPlugin />
         </LexicalComposer>
     );
   }

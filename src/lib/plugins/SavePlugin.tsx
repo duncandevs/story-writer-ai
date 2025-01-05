@@ -7,12 +7,11 @@ export const SavePlugin = () => {
     const [editorState, setEditorState] = useState(null);
     const [editorStateLoadingIsFinished, setEditorStateLoadingIsFinished] = useState(false);
     
-    _loadEditorSavedState(editor).then((res) => {
-        setEditorState(editorState);
-        setEditorStateLoadingIsFinished(true)
-    }).catch((err)=>{
-        setEditorStateLoadingIsFinished(true);
-    });
+    // loadEditorSavedState(editor).then((res) => {
+    //     setEditorState(editorState);
+    // }).catch((err)=>{
+    //     setEditorStateLoadingIsFinished(true);
+    // });
 
     useEffect(() => {
         // Register an update listener that gets called on every editor state change
@@ -38,12 +37,8 @@ function _serializeAndSaveEditorStateToJson(editor: LexicalEditor): string {
     return jsonState;
 };
 
-async function _loadEditorSavedState(editor: LexicalEditor){
+export async function loadEditorSavedState(){
         // Retrieve the serialized state from localStorage
-        const serializedState = localStorage.getItem('editorState');
-        if (serializedState) {
-            const parsedState = JSON.parse(serializedState);
-            return parsedState
-        };
-        return null;
+        const initialState = localStorage.getItem('editorState');
+        return initialState;
 };

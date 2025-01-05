@@ -9,8 +9,6 @@ import {
 } from "lexical";
 import { RichTextAction } from "@/constants";
 import { RichTextToolbarUI } from "@/components/editor/RichTextToolbarUI";
-import { $createImageNode } from "../nodes/ImageNode";
-import { $insertNodes } from "lexical";
 import { ImagePromptArea } from "@/components/editor/ImagePromptArea";
 import StreamTextPlugin from "./StreamAITextPlugin";
 import ImagePlugin from "./ImagePlugin";
@@ -136,14 +134,6 @@ export const ToolbarPlugin: React.FC<ToolbarProps> = ({ className }) => {
     });
   };
 
-  const onAddImage = () => {
-    let src = "https://image.lexica.art/full_webp/29d41c95-42cf-428d-aefa-0c1405e371b6"
-    editor.update(() => {
-      const node = $createImageNode({ src, alt: "Dummy text", width: 1000 });
-      $insertNodes([node]);
-    });
-  };
-
   useEffect(() => {
     return editor.registerUpdateListener(({ editorState }) => {
       editorState.read(() => {
@@ -151,13 +141,6 @@ export const ToolbarPlugin: React.FC<ToolbarProps> = ({ className }) => {
       });
     });
   }, [editor]);
-
-  function serializeEditorStateToJson(): string {
-    const editorState = editor.getEditorState();
-    const json = editorState.toJSON();
-    console.log('SAVED LEXICAL STATE: ', JSON.stringify(json))
-    return JSON.stringify(json);
-  };
 
   const [msgs, setMsgs] = useState<string[]>([])
   const [imagePrompt, setImagePrompt] = useState<string>();
@@ -195,7 +178,6 @@ export const ToolbarPlugin: React.FC<ToolbarProps> = ({ className }) => {
         }
         <ImagePlugin prompt={imagePrompt} />
         <StreamTextPlugin userMessages={msgs} options={{}}/>
-        <button onClick={serializeEditorStateToJson}>Save</button>
     </div>
   );
 }
