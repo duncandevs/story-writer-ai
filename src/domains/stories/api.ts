@@ -1,18 +1,24 @@
-export const fetchChapter = () => {
-    // const response = await axios.get(`/api/chapters/${chapterId}`);
-    // return response.data;
-    return  {
-        "id": "chapter_1",
-        "title": "Chapter 1: Beginnings",
-        "pages": ["page_1", "page_2"]
-    }
+import { supabase } from "@/lib/supabaseClient";
+
+export const fetchStories = async () => {
+    const { data, error } = await supabase
+        .from("stories")
+        .select(`
+            *,
+            chapters (
+                id,
+                pages (id)
+            )
+        `)
+    if(error) throw Error(`Failed to fetch stories: ${error.message}`)
+    return data; 
 };
 
-export const fetchPage = () => {
-    // const response = await axios.get(`/api/pages/${pageId}`);
-    // return response.data;
-    return {
-        "id": "page_1",
-        "content": "Once upon a time..."
-    }
+type FetchPage = { id: string }
+export const fetchPage = async ({ id }: FetchPage) => {
+    const { data, error } = await supabase
+        .from("pages")
+        .select("*")
+        .eq("id", id)
 }
+
