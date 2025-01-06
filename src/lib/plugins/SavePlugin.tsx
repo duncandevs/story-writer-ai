@@ -38,7 +38,7 @@ function _serializeAndSaveEditorStateToJson(editor: LexicalEditor): string {
 };
 
 export async function loadEditorSavedState(){
-        // Retrieve the serialized state from localStorage
-        const initialState = localStorage.getItem('editorState');
-        return initialState;
+    // Retrieve the serialized state from localStorage
+    const initialState = localStorage.getItem('editorState');
+    return initialState;
 };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { $getRoot, $isTextNode, LexicalEditor, LexicalNode } from 'lexical';
+import { $getRoot } from 'lexical';
 
 const PAGE_LENGTH = 1000;
 

@@ -1,4 +1,4 @@
-@import '../../styles/ui/variables.css';
+@import '@/styles/ui/variables.css';
 
 .container {
     margin: auto;
