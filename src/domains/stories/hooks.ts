@@ -1,11 +1,16 @@
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import { Chapter } from "./types"; // Assuming you have a Chapter type defined
-import { fetchChapters } from "./api";
+import { Chapter, MinimalStory } from "./types"; // Assuming you have a Chapter type defined
+import { fetchChapters, fetchMinimalStoryData } from "./api";
 
 export const K = {
     "stories": ["stories"],
+    "minimalStories": ["minimalStories"],
     "chapters": ["chapters"],
     "pages": ["pages"]
+}
+
+export const useMinimalStory = () => {
+    return useQuery<MinimalStory[], Error>(K.minimalStories, fetchMinimalStoryData);
 }
 
 // Custom hook to use chapters

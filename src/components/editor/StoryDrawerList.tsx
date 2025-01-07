@@ -1,7 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
 
-export const ChaptersDrawerList = () => (
+export const StoryDrawerList = () => (
             <ul className='ChapterList flex flex-col gap-4'>
                 <li>
                     <Collapsible>

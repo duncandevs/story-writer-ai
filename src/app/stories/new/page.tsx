@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "lucide-react";
-import { fetchStories } from "@/domains/stories/api";
+import { fetchMinimalStoryData } from "@/domains/stories/api";
 import { useRouter } from "next/navigation";
 
 export default function NewStory () {
@@ -10,7 +10,7 @@ export default function NewStory () {
     const router = useRouter();
 
     useEffect(()=>{
-        fetchStories()
+        fetchMinimalStoryData()
             .then((res)=>setStories(res))
             .catch((err)=>console.log('error: ', err))
     }, [])

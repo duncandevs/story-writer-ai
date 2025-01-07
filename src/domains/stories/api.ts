@@ -1,15 +1,19 @@
 import { supabase } from "@/lib/supabaseClient";
 import { Page } from "./types";
 
-export const fetchStories = async () => {
+export const fetchMinimalStoryData = async () => {
     const { data, error } = await supabase
         .from("stories")
         .select(`
             *,
             chapters (
                 id,
+                title,
+                chapter_number,
                 pages (
                     id,
+                    title,
+                    page_number
                 )
             )
         `)

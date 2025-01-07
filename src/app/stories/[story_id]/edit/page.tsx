@@ -3,12 +3,13 @@
 import './page.css';
 import { RichTextEditor } from "@/lib/RichTextEditor";
 import './page.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { EllipsisVertical, HomeIcon, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Avatar from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
-import { ChaptersDrawerList } from '@/components/editor/ChaptersDrawerList';
+import { StoryDrawerList } from '@/components/editor/StoryDrawerList';
+import { useMinimalStory } from '@/domains/stories/hooks';
 
 interface EditStoryProps {
     params: {
@@ -18,6 +19,11 @@ interface EditStoryProps {
 
 export default function EditStory ({ params }: EditStoryProps) {
     const [drawerActive, setDrawerActive] = useState(false);
+    const { data: stories } = useMinimalStory();
+
+    useEffect(()=>{
+        console.log('minimal stories: ', stories)
+    }, [stories])
 
     return (
         <div className='abhayaLibre flex' style={{minHeight: window.innerHeight}}>
@@ -30,7 +36,7 @@ export default function EditStory ({ params }: EditStoryProps) {
                         'p-4 opacity-0 transition-all duration-500',
                         `${drawerActive ? 'opacity-100': 'duration-0'}`
                     )}>
-                        <ChaptersDrawerList />
+                        <StoryDrawerList />
                     </div>
                 </div>
             </div>
