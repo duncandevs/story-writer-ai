@@ -35,7 +35,8 @@
     "style-dictionary": "^4.3.0",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
-    "together-ai": "^0.10.0"
+    "together-ai": "^0.10.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -1,6 +1,6 @@
 "use client";
 import { Card } from "@/components/ui/card";
-import React, { CSSProperties, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { HeadingNode } from "@lexical/rich-text";
 
