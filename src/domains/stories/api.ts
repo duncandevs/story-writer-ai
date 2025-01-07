@@ -8,13 +8,29 @@ export const fetchStories = async () => {
             *,
             chapters (
                 id,
-                pages (id)
+                pages (
+                    id,
+                )
             )
         `)
     if(error) throw Error(`Failed to fetch stories: ${error.message}`)
     return data; 
 };
 
+/** Chapters API */
+export const fetchChapters = async () => {
+    const { data, error } = await supabase
+        .from("chapters")
+        .select(`
+            *,
+            pages(*)    
+        `)
+    if(error) throw Error(`Failed to fetch chapters ${error.message}`)
+    return data;
+}
+
+
+/** Pages API */ 
 type FetchPage = { id: string }
 export const fetchPage = async ({ id }: FetchPage) => {
     const { data, error } = await supabase

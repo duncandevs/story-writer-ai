@@ -1,16 +1,22 @@
-"use client"
+"use client";
+
 import './page.css';
 import { RichTextEditor } from "@/lib/RichTextEditor";
 import './page.css';
 import { useState } from 'react';
 import { EllipsisVertical, HomeIcon, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
 import Avatar from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { ChaptersDrawerList } from '@/components/editor/ChaptersDrawerList';
 
-export default function RichText () {
+interface EditStoryProps {
+    params: {
+        story_id: string
+    }
+};
+
+export default function EditStory ({ params }: EditStoryProps) {
     const [drawerActive, setDrawerActive] = useState(false);
 
     return (
@@ -51,4 +57,4 @@ export default function RichText () {
             </div>
         </div>
     )
-}
+};
