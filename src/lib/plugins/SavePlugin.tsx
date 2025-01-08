@@ -6,7 +6,7 @@ import { createOrUpdatePage } from "@/domains/stories/api";
 
 export const SavePlugin = () => {
     const [editor] = useLexicalComposerContext();
-    const [editorState, setEditorState] = useState<string | null>(null);
+    const [editorState, setEditorState] = useState<string>("");
 
     useEffect(() => {
         // Register an update listener that gets called on every editor state change
@@ -26,8 +26,8 @@ export const SavePlugin = () => {
         const page = {
             id: "f58ea269-cad8-4d0c-9383-9105065b7ade",
             chapter_id: "0caecfbd-1be6-4a0f-8a13-ddaab64aefba",
-            title: null,
-            content: editorState
+            content: editorState,
+            page_number: 1,
         }
         createOrUpdatePage(page);
     }, [editorState]);

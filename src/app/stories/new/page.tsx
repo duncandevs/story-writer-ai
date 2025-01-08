@@ -21,9 +21,10 @@ export default function NewStory () {
 
     
     const goToStoryEditPage = (story: any ) => {
-        console.log(story)
-        const editRoute = `${story.id}/p/${story?.chapters?.[0]?.pages?.[0]?.id}/edit` // Go to the first page of the first chapter to begin editing
-        router.replace(editRoute)
+        const firstChapter = story.chapters[0];
+        const firstPage = firstChapter.pages[0];
+        const editRoute = `/stories/${story.id}/edit/${firstPage.id}` // Go to the first page of the first chapter to begin editing
+        router.push(editRoute)
     };
 
     return <div className="flex flex-col p-8 gap-4">

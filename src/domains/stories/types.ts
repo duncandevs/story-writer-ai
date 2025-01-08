@@ -23,26 +23,35 @@ export const PageSchema = z.object({
     chapter_id: uuidSchema,
     title: z.string().nullable(),
     content: z.string().nullable(),
-    chapter_number: z.number(),
+    page_number: z.number(),
 });
 
 export const MinimalStorySchema = z.object({
     id: uuidSchema,
     created_at: z.date().optional(),
     title: z.string().nullable(),
-    chapters: z.object({
+    chapters: z.array(z.object({
         id: uuidSchema,
         title: z.string(),
         chapter_number: z.number(),
-        pages: z.object({
+        pages: z.array(z.object({
             id: uuidSchema,
             title: z.string().nullable(),
             chapter_number: z.number(),
-        })
-    })
+        }))
+    }))
 });
+
+export const CreateOrUpdatePageParamsSchema = PageSchema.merge(
+    z.object({
+      title: z.string().optional(),
+      content: z.string().optional(),
+      page_number: z.number().optional(),
+    })
+);
 
 export type Page = z.infer<typeof PageSchema>;
 export type Chapter = z.infer<typeof ChapterSchema>;
 export type Story = z.infer<typeof StorySchema>;
 export type MinimalStory = z.infer<typeof MinimalStorySchema>;
+export type CreateOrUpdatePageParams = z.infer<typeof CreateOrUpdatePageParamsSchema>;

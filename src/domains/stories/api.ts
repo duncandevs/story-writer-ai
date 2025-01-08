@@ -1,6 +1,8 @@
 import { supabase } from "@/lib/supabaseClient";
-import { Page } from "./types";
+import { CreateOrUpdatePageParams } from "./types";
+import { z } from "zod"
 
+/** Stories Api */
 export const fetchMinimalStoryData = async () => {
     const { data, error } = await supabase
         .from("stories")
@@ -45,11 +47,12 @@ export const fetchPage = async ({ id }: FetchPage) => {
     return data;
 };
 
-export const createOrUpdatePage = async (page: Page) => {
+
+export const createOrUpdatePage = async (page: CreateOrUpdatePageParams) => {
     const { data, error } = await supabase
         .from("pages")
         .upsert([page], { onConflict: 'id' }); // Use upsert to insert or update based on the 'id' field
 
     if (error) throw Error(`Failed to create or update page: ${error.message}`);
     return data;
-}
+};
