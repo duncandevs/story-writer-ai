@@ -3,30 +3,35 @@
 import './page.css';
 import { RichTextEditor } from "@/lib/RichTextEditor";
 import './page.css';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { EllipsisVertical, HomeIcon, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Avatar from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { StoryDrawerList } from '@/components/editor/StoryDrawerList';
-import { useMinimalStory } from '@/domains/stories/hooks';
-import { useSearchParams } from 'next/navigation';
+import { useMinimalStory, useStoryPage } from '@/domains/stories/hooks';
+import { useParams } from 'next/navigation';
 
-interface EditStoryProps {
-    params: {
-        story_id: string
-    }
-};
+type RouterParams = {
+    story_id: string;
+    page_id: string;
+}
 
-export default function EditStory ({ params }: EditStoryProps) {
-    const queryParams = useSearchParams();
-    const page = queryParams.get('page');
+export default function EditStory () {
+    const routerParams = useParams<RouterParams>();
+    const pageId = routerParams.page_id;
     const [drawerActive, setDrawerActive] = useState(false);
     const { data: stories } = useMinimalStory();
-    
-    useEffect(()=>{
+    const { data: pages} = useStoryPage(pageId);
+    const [ pageContent, setPageContent ] = useState(null);
+
+    useEffect(() => {
         console.log('minimal stories: ', stories)
     }, [stories])
+
+    useEffect(() => {
+        setPageContent(pages?.[0]?.content)
+    }, [pages])
 
     return (
         <div className='abhayaLibre flex' style={{minHeight: window.innerHeight}}>
@@ -58,11 +63,12 @@ export default function EditStory ({ params }: EditStoryProps) {
                     <hr className='w-full'></hr>
                 </div>
                 <input placeholder='TITLE' className='EditorTitle flex'/>
-                <RichTextEditor 
+                {pageContent && <RichTextEditor 
                     value="value"
                     onChange={()=>null}
                     name="rich text editor"
-                />
+                    initialEditorState={pageContent}
+                />}
             </div>
         </div>
     )

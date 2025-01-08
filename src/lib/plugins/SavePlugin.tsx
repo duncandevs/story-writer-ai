@@ -1,12 +1,16 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { LexicalEditor, createEditor } from "lexical";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createOrUpdatePage } from "@/domains/stories/api";
 
+interface SavePluginProps {
+    storyId: string;
+    pageId: string;
+}
 
-export const SavePlugin = () => {
+export const SavePlugin: React.FC<SavePluginProps> = ({ storyId, pageId }) => {
     const [editor] = useLexicalComposerContext();
-    const [editorState, setEditorState] = useState<string>("");
+    const [editorState, setEditorState] = useState<string | null>(null);
 
     useEffect(() => {
         // Register an update listener that gets called on every editor state change
@@ -23,13 +27,15 @@ export const SavePlugin = () => {
     }, [editor]); // This effect depends on the `editor` instance
 
     useEffect(() => {
-        const page = {
-            id: "f58ea269-cad8-4d0c-9383-9105065b7ade",
-            chapter_id: "0caecfbd-1be6-4a0f-8a13-ddaab64aefba",
-            content: editorState,
-            page_number: 1,
+        if(editorState) {
+            const page = {
+                id: pageId,
+                chapter_id: "0caecfbd-1be6-4a0f-8a13-ddaab64aefba",
+                content: editorState,
+                page_number: 1,
+            }
+            createOrUpdatePage(page);
         }
-        createOrUpdatePage(page);
     }, [editorState]);
 
     return null;

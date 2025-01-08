@@ -1,4 +1,3 @@
-import { ChevronDown } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
 import { MinimalStory } from "@/domains/stories/types";
 import React from "react";
@@ -24,7 +23,7 @@ export const StoryDrawerList: React.FC<StoryDrawerListProps> = ({ story }) => {
                     <CollapsibleContent>
                         <ul className='PageList flex flex-col p-4 gap-4'>
                             {chapter?.pages.map((page, idx)=>(<li key={`page-${idx}`}>
-                                <button onClick={()=>goToEditPage(page.id)}>{page.title}</button>
+                                <button onClick={()=>goToEditPage(page.id)} className="hover:font-bold">{page.title}</button>
                             </li>))}
                         </ul>
                     </CollapsibleContent>

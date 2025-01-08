@@ -26,6 +26,9 @@ interface RichTextEditorProps {
   onChange: (value: string) => void;
   placeholder?: string;
   name: string;
+  initialEditorState: string;
+  storyId: string;
+  pageId: string;
 };
 
 const editorContentStyles = {
@@ -38,10 +41,9 @@ const editorContentStyles = {
     paddingBottom: 400,
 };
 
-const initialEditorState = await loadEditorSavedState();
 
 export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
-  function RichTextEditor({ placeholder, name }) {
+  function RichTextEditor({ placeholder, name, initialEditorState, storyId, pageId }) {
     const initialConfig = useMemo(
       () => ({
         editorState: initialEditorState,
@@ -89,7 +91,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
           <HistoryPlugin />
           <ListPlugin />
           <ToolbarPlugin />
-          <SavePlugin />
+          <SavePlugin storyId={storyId} pageId={pageId} />
           <PaginationPlugin />
         </LexicalComposer>
     );
