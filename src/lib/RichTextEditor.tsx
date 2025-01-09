@@ -19,14 +19,15 @@ import { ImageNode } from "./nodes/ImageNode";
 import { ToolbarPlugin } from "./plugins/ToolbarPlugin";
 import { SavePlugin, loadEditorSavedState } from "./plugins/SavePlugin";
 import { PaginationPlugin } from "./plugins/PaginationPlugin";
+import { EDITOR_EMPTY_STATE } from "@/domains/app/constants";
 
 
 interface RichTextEditorProps {
   value: string;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
   placeholder?: string;
   name: string;
-  initialEditorState: string;
+  initialEditorState?: string | null;
   storyId: string;
   pageId: string;
 };
@@ -44,9 +45,10 @@ const editorContentStyles = {
 
 export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
   function RichTextEditor({ placeholder, name, initialEditorState, storyId, pageId }) {
+    console.log('initial editor state: ', initialEditorState)
     const initialConfig = useMemo(
       () => ({
-        editorState: initialEditorState,
+        editorState: initialEditorState || EDITOR_EMPTY_STATE,
         namespace: name,
         onError: () => {},
         nodes: [

@@ -19,20 +19,22 @@ type RouterParams = {
 
 export default function EditStory () {
     const routerParams = useParams<RouterParams>();
+    const storyId = routerParams.story_id;
     const pageId = routerParams.page_id;
     const [drawerActive, setDrawerActive] = useState(false);
     const { data: stories } = useMinimalStory();
-    const { data: pages} = useStoryPage(pageId);
-    const [ pageContent, setPageContent ] = useState(null);
+    const { data: pages, isLoading} = useStoryPage(pageId);
+    const [editorState, setEditorState] = useState<string | null>(null);
+    const hasPageDataFinishedLoading = !isLoading;
 
     useEffect(() => {
-        console.log('minimal stories: ', stories)
-    }, [stories])
+        if (hasPageDataFinishedLoading) {
+            setEditorState(pages?.[0]?.content);
+        }
+    }, [hasPageDataFinishedLoading, pages, pageId]);
 
-    useEffect(() => {
-        setPageContent(pages?.[0]?.content)
-    }, [pages])
 
+    
     return (
         <div className='abhayaLibre flex' style={{minHeight: window.innerHeight}}>
             <div className='bg-olive-50 h-auto min-h-screen flex-shrink-0'>
@@ -63,11 +65,12 @@ export default function EditStory () {
                     <hr className='w-full'></hr>
                 </div>
                 <input placeholder='TITLE' className='EditorTitle flex'/>
-                {pageContent && <RichTextEditor 
+                {hasPageDataFinishedLoading && <RichTextEditor 
                     value="value"
-                    onChange={()=>null}
                     name="rich text editor"
-                    initialEditorState={pageContent}
+                    initialEditorState={pages?.[0]?.content}
+                    storyId={storyId}
+                    pageId={pageId}
                 />}
             </div>
         </div>

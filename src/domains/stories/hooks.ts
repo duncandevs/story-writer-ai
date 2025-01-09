@@ -7,11 +7,11 @@ export const K = {
     "minimalStories": ["minimalStories"],
     "chapters": ["chapters"],
     "pages": (id: string)=>["pages", id],
-}
+};
 
 export const useMinimalStory = () => {
     return useQuery<MinimalStory[], Error>(K.minimalStories, fetchMinimalStoryData);
-}
+};
 
 // Custom hook to use chapters
 export const useChapters = () => {
@@ -19,5 +19,10 @@ export const useChapters = () => {
 };
 
 export const useStoryPage = (page_id: string) => {
-    return useQuery<any, Error>(K.pages(page_id), () => fetchPage({id: page_id}))
-}
+    return useQuery<any, Error>(K.pages(page_id), () => fetchPage({id: page_id}), {
+        staleTime: 0, // Data goes stale immediately
+        cacheTime: 0, // Data is not cached
+        refetchOnWindowFocus: true, // Refetch when window regains focus
+        refetchOnMount: true, // Refetch every time the component mounts
+    })
+};

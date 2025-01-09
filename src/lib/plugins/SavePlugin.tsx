@@ -2,6 +2,7 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { LexicalEditor, createEditor } from "lexical";
 import React, { useEffect, useState } from "react";
 import { createOrUpdatePage } from "@/domains/stories/api";
+import { useMutation } from 'react-query';
 
 interface SavePluginProps {
     storyId: string;
@@ -11,7 +12,7 @@ interface SavePluginProps {
 export const SavePlugin: React.FC<SavePluginProps> = ({ storyId, pageId }) => {
     const [editor] = useLexicalComposerContext();
     const [editorState, setEditorState] = useState<string | null>(null);
-
+    const mutation = useMutation(createOrUpdatePage);
     useEffect(() => {
         // Register an update listener that gets called on every editor state change
         const removeUpdateListener = editor.registerUpdateListener(() => {
@@ -34,7 +35,7 @@ export const SavePlugin: React.FC<SavePluginProps> = ({ storyId, pageId }) => {
                 content: editorState,
                 page_number: 1,
             }
-            createOrUpdatePage(page);
+            mutation.mutate(page);
         }
     }, [editorState]);
 
