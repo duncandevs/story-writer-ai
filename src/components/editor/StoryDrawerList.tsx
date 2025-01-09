@@ -2,6 +2,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/colla
 import { MinimalStory } from "@/domains/stories/types";
 import React from "react";
 import { useRouter } from "next/navigation";
+import { PlusCircle } from "lucide-react";
 
 interface StoryDrawerListProps {
     story: MinimalStory | undefined
@@ -15,11 +16,16 @@ export const StoryDrawerList: React.FC<StoryDrawerListProps> = ({ story }) => {
         <ul className='ChapterList flex flex-col gap-4'>
             {story?.chapters?.map((chapter, idx)=>(<li key={`chapter-${idx}`}>
                 <Collapsible>
-                    <CollapsibleTrigger className="w-full">
-                        <div className="flex w-full justify-between hover:bg-amber-200 p-2 rounded-md">
-                            <p>{chapter.title}</p>
-                        </div>
-                    </CollapsibleTrigger>
+                    <div className="flex hover:bg-amber-200 rounded-md group">
+                        <CollapsibleTrigger className="w-full">
+                            <div className="flex w-full justify-between p-2 justify-between group">
+                                <p>{chapter.title}</p>
+                            </div>
+                        </CollapsibleTrigger>
+                        <button className="p-2 opacity-0 group-hover:opacity-100">
+                            <PlusCircle width={16} height={16} className="hover:stroke-amber-100"/>
+                        </button>
+                    </div>
                     <CollapsibleContent>
                         <ul className='PageList flex flex-col p-4 gap-4'>
                             {chapter?.pages.map((page, idx)=>(<li key={`page-${idx}`}>

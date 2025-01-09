@@ -15,7 +15,7 @@ export const EditorImageStylesDialog: React.FC<EditorImageStylesDialogProps> = (
 			{children}
 		</DialogTrigger>
 		<DialogContent>
-            <DialogTitle>Testin</DialogTitle>
+            <DialogTitle className='text-amber-200'>Testin</DialogTitle>
             <EditorImageStyleItem imgSrc={imageSrcOne} title="Island" onClick={()=>alert('handle image style')} />
 		</DialogContent>
 	</DialogRoot>
