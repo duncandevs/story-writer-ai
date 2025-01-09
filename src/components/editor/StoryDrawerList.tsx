@@ -3,14 +3,20 @@ import { MinimalStory } from "@/domains/stories/types";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { PlusCircle } from "lucide-react";
+import { useCreatePage } from "@/domains/stories/hooks";
 
 interface StoryDrawerListProps {
     story: MinimalStory | undefined
 };
 
+
 export const StoryDrawerList: React.FC<StoryDrawerListProps> = ({ story }) => {
     const router = useRouter();
+    const { createNewPage } = useCreatePage()
     const goToEditPage = (pageId: string) => router.push(`/stories/${story?.id}/edit/${pageId}`);
+    const handleCreateNewPage = (chapterId:string) => {
+        createNewPage({ chapterId })
+    };
 
     return (
         <ul className='ChapterList flex flex-col gap-4'>
@@ -22,7 +28,7 @@ export const StoryDrawerList: React.FC<StoryDrawerListProps> = ({ story }) => {
                                 <p>{chapter.title}</p>
                             </div>
                         </CollapsibleTrigger>
-                        <button className="p-2 opacity-0 group-hover:opacity-100">
+                        <button className="p-2 opacity-0 group-hover:opacity-100" onClick={()=>handleCreateNewPage(chapter.id)}>
                             <PlusCircle width={16} height={16} className="hover:stroke-amber-100"/>
                         </button>
                     </div>
