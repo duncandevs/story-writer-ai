@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $getSelection, $isRangeSelection, $getRoot, $createTextNode } from "lexical";
-import createChatCompletionStream  from "@/lib/together/createChatCompletionStream";
+import { createChatCompletionStream }  from "@/lib/together/createChatCompletionStream";
 
 
 interface StreamAITextPluginProps {

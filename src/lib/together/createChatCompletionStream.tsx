@@ -76,10 +76,10 @@ async function* createChatCompletionStream(
         yield deltaContent;
       }
     } catch (error) {
-      console.error("Error creating chat completion:", error);
+      console.log("Error creating chat completion:", error?.message || error?.messages?.[0]);
       throw error; // Propagate the error to the caller
     }
 }
   
 
-export default createChatCompletionStream;
+export  { createChatCompletionStream };

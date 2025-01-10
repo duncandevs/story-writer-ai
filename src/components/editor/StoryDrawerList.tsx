@@ -24,7 +24,7 @@ export const StoryDrawerList: React.FC<StoryDrawerListProps> = ({ story }) => {
                 <Collapsible>
                     <div className="flex hover:bg-amber-200 rounded-md group">
                         <CollapsibleTrigger className="w-full">
-                            <div className="flex w-full justify-between p-2 justify-between group">
+                            <div className="flex w-full p-2 group">
                                 <p>{chapter.title}</p>
                             </div>
                         </CollapsibleTrigger>
@@ -35,7 +35,7 @@ export const StoryDrawerList: React.FC<StoryDrawerListProps> = ({ story }) => {
                     <CollapsibleContent>
                         <ul className='PageList flex flex-col p-4 gap-4'>
                             {chapter?.pages.map((page, idx)=>(<li key={`page-${idx}`}>
-                                <button onClick={()=>goToEditPage(page.id)} className="hover:font-bold">{page.title}</button>
+                                <button onClick={()=>goToEditPage(page.id)} className="hover:font-bold  text-start">{page.title}</button>
                             </li>))}
                         </ul>
                     </CollapsibleContent>
