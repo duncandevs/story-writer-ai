@@ -34,7 +34,6 @@ export const SavePlugin: React.FC<SavePluginProps> = ({ storyId, pageId }) => {
                 id: pageId,
                 chapter_id: "0caecfbd-1be6-4a0f-8a13-ddaab64aefba",
                 content: editorState,
-                page_number: 1,
             }
             createOrUpdatePageMutation(page)
         }

@@ -69,7 +69,6 @@ export const useCreatePage = () => {
       const newPage: CreateOrUpdatePageParams = {
         chapter_id: params.chapterId,
         title: 'New Page',
-        page_number: 3, // Adjust as needed
       };
   
       mutation.mutate(newPage);
