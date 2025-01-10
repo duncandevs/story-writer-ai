@@ -32,7 +32,6 @@ export const useChapters = () => {
 };
 
 export const useStoryPage = (page_id: string) => {
-  const queryClient = useQueryClient();  
   const queryResult = useQuery<any, Error>(K.pages(page_id), () => fetchPage({id: page_id}), {
         staleTime: 0, // Data goes stale immediately
         cacheTime: 0, // Data is not cached

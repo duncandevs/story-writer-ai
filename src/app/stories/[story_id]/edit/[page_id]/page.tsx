@@ -12,6 +12,7 @@ import { StoryDrawerList } from '@/components/editor/StoryDrawerList';
 import { useMinimalStory, useStoryPage, useUpdatePageTitle } from '@/domains/stories/hooks';
 import { useParams } from 'next/navigation';
 import { debounce } from 'lodash';
+import { EditorPageTitleInput } from '@/components/editor/EditorPageTitle';
 
 type RouterParams = {
     story_id: string;
@@ -25,15 +26,9 @@ export default function EditStory () {
     const [drawerActive, setDrawerActive] = useState(false);
     const { data: stories } = useMinimalStory();
     const { data: pages, isLoading} = useStoryPage(pageId);
-    const [editorState, setEditorState] = useState<string | null>(null);
     const hasPageDataFinishedLoading = !isLoading;
-    const { createUpdatePageTitle } = useUpdatePageTitle()
+    const { createUpdatePageTitle } = useUpdatePageTitle();
 
-    useEffect(() => {
-        if (hasPageDataFinishedLoading) {
-            setEditorState(pages?.[0]?.content);
-        }
-    }, [hasPageDataFinishedLoading, pages, pageId]);
 
     const handleUpdatePageTitle = React.useCallback(
         debounce((title: string) => {
@@ -42,8 +37,7 @@ export default function EditStory () {
         [pageId]
     );
 
-    const onTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const title = event.target.value;
+    const onTitleChange = (title: string) => {
         handleUpdatePageTitle(title);
     };
       
@@ -77,7 +71,8 @@ export default function EditStory () {
                     </div>
                     <hr className='w-full'></hr>
                 </div>
-                <input placeholder='TITLE' className='EditorTitle flex' onChange={onTitleChange}/>
+                {/* <input placeholder='TITLE' className='EditorTitle flex' onChange={onTitleChange} /> */}
+                <EditorPageTitleInput initialTitle={pages?.[0]?.title} onUpdateTitle={onTitleChange} className='EditorTitle flex'/>
                 {hasPageDataFinishedLoading && <RichTextEditor 
                     value="value"
                     name="rich text editor"
