@@ -32,10 +32,12 @@ export const MinimalStorySchema = z.object({
     title: z.string().nullable(),
     chapters: z.array(z.object({
         id: uuidSchema,
+        created_at: z.date(),
         title: z.string(),
         chapter_number: z.number(),
         pages: z.array(z.object({
             id: uuidSchema,
+            created_at: z.date(),
             title: z.string().nullable(),
             chapter_number: z.number(),
         }))

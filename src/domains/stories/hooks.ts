@@ -10,7 +10,18 @@ export const K = {
 };
 
 export const useMinimalStory = () => {
-    return useQuery<MinimalStory[], Error>(K.minimalStories, fetchMinimalStoryData);
+    return useQuery<MinimalStory[], Error>(K.minimalStories, fetchMinimalStoryData, {
+      select: (data) => {
+        // Sort pages within each chapter by created_at in descending order
+        return data.map(story => ({
+          ...story,
+          chapters: story.chapters.map(chapter => ({
+            ...chapter,
+            pages: chapter.pages.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
+          }))
+        }));
+      }
+    });
 };
 
 // Custom hook to use chapters
@@ -46,6 +57,7 @@ export const useCreatePage = () => {
   
     const mutation = useMutation(createOrUpdatePage, {
       onSuccess: (newPage: any) => {
+        console.log('NEW PAGE IN MUTATION: ', newPage)
         // Update the query store with the new page
         queryClient.setQueryData(K.pages(newPage.id), newPage);
       },

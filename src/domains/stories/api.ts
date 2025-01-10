@@ -10,10 +10,12 @@ export const fetchMinimalStoryData = async () => {
             *,
             chapters (
                 id,
+                created_at,
                 title,
                 chapter_number,
                 pages (
                     id,
+                    created_at,
                     title,
                     page_number
                 )
@@ -29,7 +31,9 @@ export const fetchChapters = async () => {
         .from("chapters")
         .select(`
             *,
-            pages(*)    
+            pages(
+                *
+            )    
         `)
     if(error) throw Error(`Failed to fetch chapters ${error.message}`)
     return data;
@@ -51,8 +55,8 @@ export const fetchPage = async ({ id }: FetchPage) => {
 export const createOrUpdatePage = async (page: CreateOrUpdatePageParams) => {
     const { data, error } = await supabase
         .from("pages")
-        .upsert([page], { onConflict: 'id' }); // Use upsert to insert or update based on the 'id' field
-
+        .upsert([page], { onConflict: 'id' }) // Use upsert to insert or update based on the 'id' field
+        .select("*")
     if (error) throw Error(`Failed to create or update page: ${error.message}`);
-    return data;
+    return data?.[0];
 };
