@@ -13,6 +13,7 @@ import { useMinimalStory, useStoryPage, useUpdatePageTitle } from '@/domains/sto
 import { useParams } from 'next/navigation';
 import { debounce } from 'lodash';
 import { EditorPageTitleInput } from '@/components/editor/EditorPageTitle';
+import { useScrollHide } from '@/domains/app/hooks';
 
 type RouterParams = {
     story_id: string;
@@ -28,6 +29,7 @@ export default function EditStory () {
     const { data: pages, isLoading} = useStoryPage(pageId);
     const hasPageDataFinishedLoading = !isLoading;
     const { createUpdatePageTitle } = useUpdatePageTitle();
+    const isVisible = useScrollHide();
 
 
     const handleUpdatePageTitle = React.useCallback(
@@ -44,7 +46,7 @@ export default function EditStory () {
     
     return (
         <div className='abhayaLibre flex' style={{minHeight: window.innerHeight}}>
-            <div className='bg-olive-50 h-auto min-h-screen flex-shrink-0 fixed'>
+            <div className='bg-olive-50 h-auto min-h-screen flex-shrink-0 fixed z-10'>
                 <Button className='m-4 w-[32px] h-[32px]' onClick={()=>setDrawerActive(!drawerActive)}><Menu /></Button>
                 <div className={`transition-all duration-300 ${
                     drawerActive ? "w-[300px]" : "w-[60px]"
@@ -58,7 +60,11 @@ export default function EditStory () {
                 </div>
             </div>
             <div className='w-full'>
-                <div className='w-inherit'>
+                <div className={cn('w-inherit fixed w-full header',
+                    `w-inherit fixed w-full header transition-transform duration-300 ${
+                        isVisible ? "translate-y-0" : "-translate-y-full"
+                    }`
+                )}>
                     <div className='flex items-center w-full p-4 pl-8 pr-8 justify-between'>
                         <div className='flex gap-4 pl-16'>
                             <HomeIcon />
@@ -71,15 +77,16 @@ export default function EditStory () {
                     </div>
                     <hr className='w-full'></hr>
                 </div>
-                {/* <input placeholder='TITLE' className='EditorTitle flex' onChange={onTitleChange} /> */}
-                <EditorPageTitleInput initialTitle={pages?.[0]?.title} onUpdateTitle={onTitleChange} className='EditorTitle flex'/>
-                {hasPageDataFinishedLoading && <RichTextEditor 
-                    value="value"
-                    name="rich text editor"
-                    initialEditorState={pages?.[0]?.content}
-                    storyId={storyId}
-                    pageId={pageId}
-                />}
+                <div className='mt-20'>
+                    <EditorPageTitleInput initialTitle={pages?.[0]?.title} onUpdateTitle={onTitleChange} className='EditorTitle flex'/>
+                    {hasPageDataFinishedLoading && <RichTextEditor 
+                        value="value"
+                        name="rich text editor"
+                        initialEditorState={pages?.[0]?.content}
+                        storyId={storyId}
+                        pageId={pageId}
+                    />}
+                </div>
             </div>
         </div>
     )

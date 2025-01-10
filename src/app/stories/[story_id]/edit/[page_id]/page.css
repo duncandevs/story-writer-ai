@@ -29,3 +29,7 @@
 .ChapterTitle {
     font-size: 20;
 }
+
+.header {
+    background-color: var(--color-page);
+}
