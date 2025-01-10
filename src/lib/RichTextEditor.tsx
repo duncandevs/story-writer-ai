@@ -45,7 +45,6 @@ const editorContentStyles = {
 
 export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
   function RichTextEditor({ placeholder, name, initialEditorState, storyId, pageId }) {
-    console.log('initial editor state: ', initialEditorState)
     const initialConfig = useMemo(
       () => ({
         editorState: initialEditorState || EDITOR_EMPTY_STATE,

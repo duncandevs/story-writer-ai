@@ -3,14 +3,15 @@
 import './page.css';
 import { RichTextEditor } from "@/lib/RichTextEditor";
 import './page.css';
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
 import { EllipsisVertical, HomeIcon, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Avatar from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { StoryDrawerList } from '@/components/editor/StoryDrawerList';
-import { useMinimalStory, useStoryPage } from '@/domains/stories/hooks';
+import { useMinimalStory, useStoryPage, useUpdatePageTitle } from '@/domains/stories/hooks';
 import { useParams } from 'next/navigation';
+import { debounce } from 'lodash';
 
 type RouterParams = {
     story_id: string;
@@ -26,6 +27,7 @@ export default function EditStory () {
     const { data: pages, isLoading} = useStoryPage(pageId);
     const [editorState, setEditorState] = useState<string | null>(null);
     const hasPageDataFinishedLoading = !isLoading;
+    const { createUpdatePageTitle } = useUpdatePageTitle()
 
     useEffect(() => {
         if (hasPageDataFinishedLoading) {
@@ -33,7 +35,18 @@ export default function EditStory () {
         }
     }, [hasPageDataFinishedLoading, pages, pageId]);
 
+    const handleUpdatePageTitle = React.useCallback(
+        debounce((title: string) => {
+          createUpdatePageTitle({ id: pageId, title });
+        }, 500),
+        [pageId]
+    );
 
+    const onTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const title = event.target.value;
+        handleUpdatePageTitle(title);
+    };
+      
     
     return (
         <div className='abhayaLibre flex' style={{minHeight: window.innerHeight}}>
@@ -64,7 +77,7 @@ export default function EditStory () {
                     </div>
                     <hr className='w-full'></hr>
                 </div>
-                <input placeholder='TITLE' className='EditorTitle flex'/>
+                <input placeholder='TITLE' className='EditorTitle flex' onChange={onTitleChange}/>
                 {hasPageDataFinishedLoading && <RichTextEditor 
                     value="value"
                     name="rich text editor"

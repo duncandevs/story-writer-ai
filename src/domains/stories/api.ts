@@ -41,7 +41,9 @@ export const fetchChapters = async () => {
 
 
 /** Pages API */ 
-type FetchPage = { id: string }
+interface FetchPage { 
+    id: string 
+}
 export const fetchPage = async ({ id }: FetchPage) => {
     const { data, error } = await supabase
         .from("pages")
@@ -59,4 +61,18 @@ export const createOrUpdatePage = async (page: CreateOrUpdatePageParams) => {
         .select("*")
     if (error) throw Error(`Failed to create or update page: ${error.message}`);
     return data?.[0];
+};
+
+interface UpdatePageTitleParams {
+    pageId: string;
+    newTitle: string;
+}
+export const updatePageTitle = async ({ pageId, newTitle }: UpdatePageTitleParams) => {
+    const { data, error } = await supabase
+        .from("pages")
+        .update({ title: newTitle })
+        .eq("id", pageId);
+
+    if (error) throw new Error(`Failed to update page title: ${error.message}`);
+    return data;
 };

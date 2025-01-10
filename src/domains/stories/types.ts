@@ -47,6 +47,7 @@ export const MinimalStorySchema = z.object({
 export const CreateOrUpdatePageParamsSchema = PageSchema.merge(
     z.object({
         id: z.string().optional(),
+        chapter_id: z.string().optional(),
         title: z.string().optional(),
         content: z.string().optional().nullable(),
         page_number: z.number().optional(),

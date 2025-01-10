@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import { Chapter, CreateOrUpdatePageParams, MinimalStory } from "./types"; // Assuming you have a Chapter type defined
+import { Chapter, CreateOrUpdatePageParams, MinimalStory, Page } from "./types"; // Assuming you have a Chapter type defined
 import { fetchChapters, fetchMinimalStoryData, fetchPage, createOrUpdatePage } from "./api";
 
 export const K = {
@@ -68,11 +68,35 @@ export const useCreatePage = () => {
     const createNewPage = (params: createNewPageProps) => {
       const newPage: CreateOrUpdatePageParams = {
         chapter_id: params.chapterId,
-        title: 'New Page',
+        title: params.title || "New Page",
       };
   
       mutation.mutate(newPage);
     };
   
     return { createNewPage, ...mutation };
+};
+
+export const useUpdatePageTitle = () => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(createOrUpdatePage, {
+    onSuccess: (newPage: any) => {
+      queryClient.setQueryData(K.pages(newPage.id), newPage);
+      queryClient.invalidateQueries(K.minimalStories);
+    },
+  });
+
+  const createUpdatePageTitle = (params: CreateOrUpdatePageParams) => {
+    if(!params.id || !params.title) throw(`Failed to update page title missing title or id`);
+
+    const updatedPage = {
+      ...params
+    };
+
+    mutation.mutate(updatedPage);
   };
+
+  return { createUpdatePageTitle, ...mutation };
+};
+
