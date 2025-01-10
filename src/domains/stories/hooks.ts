@@ -11,6 +11,8 @@ export const K = {
 
 export const useMinimalStory = () => {
     return useQuery<MinimalStory[], Error>(K.minimalStories, fetchMinimalStoryData, {
+      staleTime: 0, // Data goes stale immediately
+      cacheTime: 0, // Data is not cached
       select: (data) => {
         // Sort pages within each chapter by created_at in descending order
         return data.map(story => ({
@@ -30,7 +32,8 @@ export const useChapters = () => {
 };
 
 export const useStoryPage = (page_id: string) => {
-    const queryResult = useQuery<any, Error>(K.pages(page_id), () => fetchPage({id: page_id}), {
+  const queryClient = useQueryClient();  
+  const queryResult = useQuery<any, Error>(K.pages(page_id), () => fetchPage({id: page_id}), {
         staleTime: 0, // Data goes stale immediately
         cacheTime: 0, // Data is not cached
         refetchOnWindowFocus: true, // Refetch when window regains focus
@@ -57,9 +60,8 @@ export const useCreatePage = () => {
   
     const mutation = useMutation(createOrUpdatePage, {
       onSuccess: (newPage: any) => {
-        console.log('NEW PAGE IN MUTATION: ', newPage)
-        // Update the query store with the new page
         queryClient.setQueryData(K.pages(newPage.id), newPage);
+        queryClient.invalidateQueries(K.minimalStories);
       },
     });
   
