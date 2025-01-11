@@ -4,10 +4,10 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
-    const { message, options } = await request.json();
+    const { messages, options } = await request.json();
 
     // Initialize the stream
-    const tokenStream = createChatCompletionStream([message], options);
+    const tokenStream = createChatCompletionStream(messages, options);
 
     const encoder = new TextEncoder();
     const stream = new ReadableStream({

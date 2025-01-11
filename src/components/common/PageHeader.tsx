@@ -1,4 +1,4 @@
-import { Cloud, CreditCard, Github, HomeIcon, Info, Keyboard, LifeBuoy, LogIn, Mail, MessageSquare, Plus, PlusCircle, Settings, User, UserPlus, Users } from "lucide-react";
+import { CreditCard, Github, HomeIcon, Info,LogIn, Mail, MessageSquare, PlusCircle, Settings, User, UserPlus } from "lucide-react";
 import Avatar from '@/components/ui/avatar';
 import { EllipsisVertical } from "lucide-react";
 import {
@@ -59,27 +59,27 @@ const HeaderDropdownMenu = () => (
         </DropdownMenuGroup>
         <DropdownMenuGroup>
             <DropdownMenuSub>
-                <DropdownMenuSubTrigger>
+            <DropdownMenuSubTrigger>
                 <UserPlus />
                 <span>Share</span>
                 </DropdownMenuSubTrigger>
                 <DropdownMenuPortal>
                 <DropdownMenuSubContent>
                     <DropdownMenuItem>
-                    <Mail />
-                    <span>Email</span>
+                        <Mail />
+                        <span>Email</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                    <MessageSquare />
-                    <span>Message</span>
+                        <MessageSquare />
+                        <span>Message</span>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                    <PlusCircle />
-                    <span>More...</span>
+                        <PlusCircle />
+                        <span>More...</span>
                     </DropdownMenuItem>
                 </DropdownMenuSubContent>
-                </DropdownMenuPortal>
+            </DropdownMenuPortal>
             </DropdownMenuSub>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
