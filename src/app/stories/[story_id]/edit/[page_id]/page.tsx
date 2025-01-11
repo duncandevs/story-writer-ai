@@ -14,6 +14,7 @@ import { useParams } from 'next/navigation';
 import { debounce } from 'lodash';
 import { EditorPageTitleInput } from '@/components/editor/EditorPageTitle';
 import { useScrollHide } from '@/domains/app/hooks';
+import { PageHeader } from '@/components/common/PageHeader';
 
 type RouterParams = {
     story_id: string;
@@ -65,17 +66,7 @@ export default function EditStory () {
                         isVisible ? "translate-y-0" : "-translate-y-full"
                     }`
                 )}>
-                    <div className='flex items-center w-full p-4 pl-8 pr-8 justify-between'>
-                        <div className='flex gap-4 pl-16'>
-                            <HomeIcon />
-                            <p>My Story</p>
-                        </div>
-                        <div className='flex items-center gap-2'>
-                            <Avatar src='https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80' fallback='avatar'/>
-                            <EllipsisVertical />
-                        </div>
-                    </div>
-                    <hr className='w-full'></hr>
+                    <PageHeader />
                 </div>
                 <div className='mt-20'>
                     <EditorPageTitleInput initialTitle={pages?.[0]?.title} onUpdateTitle={onTitleChange} className='EditorTitle flex'/>
