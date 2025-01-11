@@ -1,4 +1,4 @@
-import { Cloud, CreditCard, Github, HomeIcon, Keyboard, LifeBuoy, LogOut, Mail, MessageSquare, Plus, PlusCircle, Settings, User, UserPlus, Users } from "lucide-react";
+import { Cloud, CreditCard, Github, HomeIcon, Info, Keyboard, LifeBuoy, LogIn, Mail, MessageSquare, Plus, PlusCircle, Settings, User, UserPlus, Users } from "lucide-react";
 import Avatar from '@/components/ui/avatar';
 import { EllipsisVertical } from "lucide-react";
 import {
@@ -15,6 +15,7 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
 
 const HeaderDropdownMenu = () => (
     <DropdownMenu>
@@ -22,8 +23,23 @@ const HeaderDropdownMenu = () => (
             <EllipsisVertical className="hover:stroke-amber-100" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56 bg-olive-50 m-4">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>Project</DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <Link href="https://www.github.com/duncandevs" target="_blank" passHref>
+            <DropdownMenuItem>
+                <Github />
+                <span>Github</span>
+                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+            </DropdownMenuItem>
+          </Link>
+          <DropdownMenuItem>
+            <Info />
+            <span>About</span>
+            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
+        <DropdownMenuLabel>Account</DropdownMenuLabel>
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <User />
@@ -41,7 +57,6 @@ const HeaderDropdownMenu = () => (
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
-        <DropdownMenuSeparator />
         <DropdownMenuGroup>
             <DropdownMenuSub>
                 <DropdownMenuSubTrigger>
@@ -66,15 +81,11 @@ const HeaderDropdownMenu = () => (
                 </DropdownMenuSubContent>
                 </DropdownMenuPortal>
             </DropdownMenuSub>
-            <DropdownMenuItem>
-                <Github />
-                <span>GitHub</span>
-            </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <LogOut />
-          <span>Log out</span>
+          <LogIn />
+          <span>Login</span>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -89,7 +100,7 @@ export const PageHeader = () => (
                 <p>My Story</p>
             </div>
             <div className='flex items-center gap-2'>
-                <Avatar src='https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80' fallback='avatar'/>
+                <Avatar src={'https://image.lexica.art/full_webp/bbd5dffa-e84a-476f-b546-41db4d20b94b'} fallback='avatar'/>
                 <HeaderDropdownMenu />
             </div>
         </div>
