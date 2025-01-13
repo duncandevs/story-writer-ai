@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $getSelection, $isRangeSelection, $getRoot, $createTextNode, LexicalEditor } from "lexical";
 
+
 interface StreamAITextPluginProps {
   userMessages: string[];
   options: {};
