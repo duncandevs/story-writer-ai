@@ -37,7 +37,10 @@ export const StoryDrawerList: React.FC<StoryDrawerListProps> = ({ story, classNa
                     <CollapsibleContent>
                         <ul className='PageList flex flex-col p-4 gap-4'>
                             {chapter?.pages.map((page, idx)=>(<li key={`page-${idx}`}>
-                                <button onClick={()=>goToEditPage(page.id)} className="hover:font-bold  text-start">{page.title}</button>
+                                <button onClick={()=>goToEditPage(page.id)} className="hover:font-bold  text-start">
+                                    <p>{page.title}</p>
+                                    
+                                </button>
                             </li>))}
                         </ul>
                     </CollapsibleContent>

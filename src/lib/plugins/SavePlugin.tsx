@@ -1,7 +1,6 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { LexicalEditor } from "lexical";
 import React, { useEffect, useState } from "react";
-import { useStoryPage } from "@/domains/stories/hooks";
 import { debounce } from "lodash";
 import { useMutation } from "react-query";
 import { createOrUpdatePage } from "@/domains/stories/api";
@@ -44,9 +43,9 @@ export const SavePlugin: React.FC<SavePluginProps> = ({ storyId, pageId }) => {
                 chapter_id: "0caecfbd-1be6-4a0f-8a13-ddaab64aefba",
                 content: editorState,
             };
-            debouncedUpdatePage(page);
+            debouncedUpdatePage && debouncedUpdatePage(page);
         }
-    }, [editorState, debouncedUpdatePage, pageId]);
+    }, [editorState, pageId]);
 
     return null;
 }
