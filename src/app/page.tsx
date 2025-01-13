@@ -14,8 +14,9 @@ export default function GoToFirstStory () {
     }, []);
     
     const goToStoryEditPage = (story: any ) => {
-        const firstChapter = story.chapters[0];
-        const firstPage = firstChapter.pages[0];
+        console.log('story: ', story)
+        const firstChapter = story?.chapters[0];
+        const firstPage = firstChapter?.pages[0];
         const editRoute = `/stories/${story.id}/edit/${firstPage.id}` // Go to the first page of the first chapter to begin editing
         router.push(editRoute)
     };
