@@ -26,6 +26,13 @@ export const PageSchema = z.object({
     page_number: z.number(),
 });
 
+export const MinimalPageSchema = z.object({
+    id: uuidSchema,
+    created_at: z.date(),
+    title: z.string().nullable(),
+    chapter_number: z.number(),
+})
+
 export const MinimalStorySchema = z.object({
     id: uuidSchema,
     created_at: z.date().optional(),
@@ -58,4 +65,5 @@ export type Page = z.infer<typeof PageSchema>;
 export type Chapter = z.infer<typeof ChapterSchema>;
 export type Story = z.infer<typeof StorySchema>;
 export type MinimalStory = z.infer<typeof MinimalStorySchema>;
+export type MinimalPage = z.infer<typeof MinimalPageSchema>;
 export type CreateOrUpdatePageParams = z.infer<typeof CreateOrUpdatePageParamsSchema>;

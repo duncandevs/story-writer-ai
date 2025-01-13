@@ -4,7 +4,9 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { PlusCircle } from "lucide-react";
 import { useCreatePage } from "@/domains/stories/hooks";
+import { StoryDrawerPageOptionsDropdown } from "../common/StoryDrawerPageOptionsDropdown";
 import { cn } from "@/lib/utils";
+import { getPageRoute } from "@/domains/app/constants";
 
 interface StoryDrawerListProps {
     story: MinimalStory | undefined;
@@ -15,13 +17,13 @@ interface StoryDrawerListProps {
 export const StoryDrawerList: React.FC<StoryDrawerListProps> = ({ story, className }) => {
     const router = useRouter();
     const { createNewPage } = useCreatePage()
-    const goToEditPage = (pageId: string) => router.push(`/stories/${story?.id}/edit/${pageId}`);
+    const goToEditPage = (pageId: string) => story && router.push(getPageRoute({ storyId: story.id, pageId }));
     const handleCreateNewPage = (chapterId:string) => {
         createNewPage({ chapterId })
     };
 
     return (
-        <ul className={cn('ChapterList flex flex-col gap-4', className)}>
+        <ul className={cn('ChapterList flex flex-col gap-4 w-inherit', className)}>
             {story?.chapters?.map((chapter, idx)=>(<li key={`chapter-${idx}`}>
                 <Collapsible>
                     <div className="flex hover:bg-amber-200 rounded-md group">
@@ -35,11 +37,11 @@ export const StoryDrawerList: React.FC<StoryDrawerListProps> = ({ story, classNa
                         </button>
                     </div>
                     <CollapsibleContent>
-                        <ul className='PageList flex flex-col p-4 gap-4'>
+                        <ul className='PageList flex flex-col p-4 gap-4 w-72'>
                             {chapter?.pages.map((page, idx)=>(<li key={`page-${idx}`}>
-                                <button onClick={()=>goToEditPage(page.id)} className="hover:font-bold  text-start">
-                                    <p>{page.title}</p>
-                                    
+                                <button onClick={()=>goToEditPage(page.id)} className="group hover:font-bold  text-start flex items-center justify-between w-full">
+                                    <p className="max-w-[90%]">{page.title}</p>
+                                    <div className="opacity-0 group-hover:opacity-100"><StoryDrawerPageOptionsDropdown page={page} storyId={story.id}/></div>
                                 </button>
                             </li>))}
                         </ul>

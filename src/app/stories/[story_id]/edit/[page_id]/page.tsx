@@ -53,7 +53,7 @@ export default function EditStory () {
                     drawerActive ? "w-[300px]" : "w-[60px]"
                     } h-[200px]`}>
                     <div className={cn(
-                        'p-4 opacity-0 transition-all duration-500',
+                        'p-4 opacity-0 transition-all duration-500 w-full',
                         `${drawerActive ? 'opacity-100': 'duration-0'}`
                     )}>
                         <StoryDrawerList story={stories?.[0]} className='fixed'/>
