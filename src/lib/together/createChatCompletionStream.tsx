@@ -1,6 +1,4 @@
 // Import necessary modules
-import { type CompletionCreateParams } from 'together-ai/src/resources/chat/index.js';
-
 import { together } from '.'
 
 /**
@@ -58,7 +56,7 @@ async function* createChatCompletionStream(
     const requestOptions = { ...defaultOptions, ...options };
   
     try {
-      const messages: CompletionCreateParams.Message[] = userMessages?.map((msg)=> new UserMessage(msg));
+      const messages = userMessages?.map((msg)=> new UserMessage(msg));
   
       const response = await together.chat.completions.create({
         messages,
