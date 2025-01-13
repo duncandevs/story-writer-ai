@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { Chapter, CreateOrUpdatePageParams, MinimalStory, Page } from "./types"; // Assuming you have a Chapter type defined
-import { fetchChapters, fetchMinimalStoryData, fetchPage, createOrUpdatePage } from "./api";
+import { fetchChapters, fetchMinimalStoryData, fetchPage, createOrUpdatePage, deletePage } from "./api";
+import { useParams, useRouter } from "next/navigation";
 
 export const K = {
     "stories": ["stories"],
@@ -99,3 +100,38 @@ export const useUpdatePageTitle = () => {
   return { createUpdatePageTitle, ...mutation };
 };
 
+export const useDeletePage = () => {
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation(deletePage, {
+        onSuccess: (data, variables) => {
+            // Invalidate queries related to pages to ensure fresh data
+            // queryClient.invalidateQueries(K.pages(variables.pageId));
+            // queryClient.invalidateQueries(K.minimalStories);
+        },
+        onError: (error) => {
+            console.error("Failed to delete page:", error);
+        },
+    });
+
+    const deletePageById = (pageId: string) => {
+        mutation.mutate({ pageId });
+    };
+
+    return { deletePageById, ...mutation };
+};
+
+type RouterParams = {
+  story_id: string;
+  page_id: string;
+};
+export const usePageParams = () => {
+  const routerParams = useParams<RouterParams>();
+  const storyId = routerParams.story_id;
+  const pageId = routerParams.page_id;
+  
+  return {
+    storyId,
+    pageId
+  }
+}

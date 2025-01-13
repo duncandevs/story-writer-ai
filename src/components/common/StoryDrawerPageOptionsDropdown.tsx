@@ -7,19 +7,33 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MinimalPage } from "@/domains/stories/types";
+import { MinimalPage, MinimalStory } from "@/domains/stories/types";
 import React from "react";
 import { getPageRoute } from "@/domains/app/constants";
 import { useRouter } from "next/navigation";
+import { useDeletePage, usePageParams } from "@/domains/stories/hooks";
 
 interface StoryDrawerPageOptionsDropdownProps {
     page: MinimalPage;
-    storyId: string;
+    story: MinimalStory;
 };
 
-export const StoryDrawerPageOptionsDropdown: React.FC<StoryDrawerPageOptionsDropdownProps> = ({ page, storyId }) => {
+export const StoryDrawerPageOptionsDropdown: React.FC<StoryDrawerPageOptionsDropdownProps> = ({ page, story }) => {
     const router = useRouter();
-    const handleEditPage = () => router.push(getPageRoute({ storyId, pageId: page.id }));
+    const { deletePageById } = useDeletePage();
+    const { pageId: currentPageId } = usePageParams();
+
+    const handleEditPage = () => router.push(getPageRoute({ storyId: story?.id, pageId: page?.id }));
+    const handleDeletePage = () => {
+        const prevPageId = story?.chapters?.[0].pages?.reverse()[1].id;
+        deletePageById(page.id);
+        if(currentPageId === page?.id){
+            const fallbackPageRoute = getPageRoute({ storyId: story.id, pageId: prevPageId});
+            window.location.href = fallbackPageRoute
+        } else {
+            window.location.reload();
+        };
+    };
 
     return <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -30,7 +44,7 @@ export const StoryDrawerPageOptionsDropdown: React.FC<StoryDrawerPageOptionsDrop
                 <Edit />
                 <span>Edit</span>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleDeletePage}>
                 <Trash />
                 <span>Delete</span>
             </DropdownMenuItem>

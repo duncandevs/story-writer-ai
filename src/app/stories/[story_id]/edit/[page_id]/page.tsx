@@ -3,28 +3,21 @@
 import './page.css';
 import { RichTextEditor } from "@/lib/RichTextEditor";
 import './page.css';
-import React, { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
-import { EllipsisVertical, HomeIcon, Menu } from 'lucide-react';
+import React, { useState } from 'react';
+import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Avatar from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { StoryDrawerList } from '@/components/editor/StoryDrawerList';
 import { useMinimalStory, useStoryPage, useUpdatePageTitle } from '@/domains/stories/hooks';
-import { useParams } from 'next/navigation';
 import { debounce } from 'lodash';
 import { EditorPageTitleInput } from '@/components/editor/EditorPageTitle';
 import { useScrollHide } from '@/domains/app/hooks';
 import { PageHeader } from '@/components/common/PageHeader';
+import { usePageParams } from '@/domains/stories/hooks';
 
-type RouterParams = {
-    story_id: string;
-    page_id: string;
-}
 
 export default function EditStory () {
-    const routerParams = useParams<RouterParams>();
-    const storyId = routerParams.story_id;
-    const pageId = routerParams.page_id;
+    const { storyId, pageId } = usePageParams();
     const [drawerActive, setDrawerActive] = useState(false);
     const { data: stories } = useMinimalStory();
     const { data: pages, isLoading} = useStoryPage(pageId);

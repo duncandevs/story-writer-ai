@@ -1,11 +1,11 @@
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
-import { MinimalStory } from "@/domains/stories/types";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { PlusCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
+import { MinimalStory } from "@/domains/stories/types";
 import { useCreatePage } from "@/domains/stories/hooks";
 import { StoryDrawerPageOptionsDropdown } from "../common/StoryDrawerPageOptionsDropdown";
-import { cn } from "@/lib/utils";
 import { getPageRoute } from "@/domains/app/constants";
 
 interface StoryDrawerListProps {
@@ -41,7 +41,7 @@ export const StoryDrawerList: React.FC<StoryDrawerListProps> = ({ story, classNa
                             {chapter?.pages.map((page, idx)=>(<li key={`page-${idx}`}>
                                 <button onClick={()=>goToEditPage(page.id)} className="group hover:font-bold  text-start flex items-center justify-between w-full">
                                     <p className="max-w-[90%]">{page.title}</p>
-                                    <div className="opacity-0 group-hover:opacity-100"><StoryDrawerPageOptionsDropdown page={page} storyId={story.id}/></div>
+                                    <div className="opacity-0 group-hover:opacity-100"><StoryDrawerPageOptionsDropdown page={page} story={story}/></div>
                                 </button>
                             </li>))}
                         </ul>

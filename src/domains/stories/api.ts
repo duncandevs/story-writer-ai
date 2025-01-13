@@ -76,3 +76,16 @@ export const updatePageTitle = async ({ pageId, newTitle }: UpdatePageTitleParam
     if (error) throw new Error(`Failed to update page title: ${error.message}`);
     return data;
 };
+
+interface DeletePageParams {
+    pageId: string;
+}
+export const deletePage = async ({ pageId }: DeletePageParams) => {
+    const { data, error } = await supabase
+        .from("pages")
+        .delete()
+        .eq("id", pageId);
+
+    if (error) throw new Error(`Failed to delete page: ${error.message}`);
+    return data;
+};
