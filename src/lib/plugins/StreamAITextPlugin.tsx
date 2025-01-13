@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $getSelection, $isRangeSelection, $getRoot, $createTextNode } from "lexical";
+import { $getSelection, $isRangeSelection, $getRoot, $createTextNode, LexicalEditor } from "lexical";
 
 interface StreamAITextPluginProps {
   userMessages: string[];
@@ -13,7 +13,7 @@ const StreamTextPlugin: React.FC<StreamAITextPluginProps> = ({ userMessages = []
   useEffect(() => {
     if (!userMessages || userMessages.length === 0) return;
 
-    insertStreamedText(editor, userMessages, options).catch((error) => {
+    _insertStreamedText(editor, userMessages, options).catch((error) => {
       console.error("Error inserting streamed text:", error);
     });
   }, [userMessages]);
@@ -21,7 +21,7 @@ const StreamTextPlugin: React.FC<StreamAITextPluginProps> = ({ userMessages = []
   return null;
 };
 
-const insertStreamedText = async (editor, userMessages, options) => {
+const _insertStreamedText = async (editor: LexicalEditor, userMessages: string[], options: {}) => {
   const response = await fetch("/api/chatCompletion", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
