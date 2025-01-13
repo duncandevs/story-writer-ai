@@ -1,5 +1,5 @@
 // Import necessary modules
-import { CompletionCreateParams } from 'together-ai/src/resources/chat/index.js';
+import { type CompletionCreateParams } from 'together-ai/src/resources/chat/index.js';
 import { together } from '.'
 
 /**
