@@ -22,7 +22,9 @@ export default function GoToFirstStory () {
     };
 
     useEffect(()=>{
-      goToStoryEditPage(stories[0])
+      if(stories){
+        goToStoryEditPage(stories[0])
+      }
     }, [stories])
 
     return null;
