@@ -1,3 +1,7 @@
+## DEMO
+[https://story-writer-ai-steel.vercel.app/](https://story-writer-ai-steel.vercel.app/)
+
+
 # Story Writer AI
 
 **Story Writer AI** is a demo application showcasing human-AI collaboration in creative storytelling. This project highlights the integration of modern technologies to assist writers in crafting compelling stories, combining the strengths of artificial intelligence with human creativity.
@@ -18,6 +22,3 @@
 - **Styling**: Uses Tailwind CSS for utility-first design and ShadCN UI for pre-built, accessible components.
 - **Validation**: Employs [Zod](https://zod.dev) for schema validation to ensure robust and error-free input handling.
 - **Deployment**: Hosted on [Vercel](https://vercel.com) for scalable and efficient performance.
-
-## DEMO
-[https://story-writer-ai-steel.vercel.app/](https://story-writer-ai-steel.vercel.app/)
