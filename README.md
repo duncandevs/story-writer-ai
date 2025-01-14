@@ -17,7 +17,7 @@
 
 - **Frontend**: Built with [React](https://reactjs.org) and [Next.js](https://nextjs.org), leveraging modern component-based design and server-side rendering for a smooth user experience.
 - **Backend**: Powered by [Supabase](https://supabase.com) backend as a service platform offering database management
-- **AI Integration**: Powered by models running on TOGETHER, enabling efficient and scalable AI-driven text generation with GPT4 models and image generation with Flux.
+- **AI Integration**: Powered by models running on [Together AI](https://www.together.ai/), enabling efficient and scalable AI-driven text generation with GPT4 models and image generation with Flux.
 - **State Management**: React Query, providing efficient and scalable data fetching, caching, and synchronization across the app. ensures efficient data flow and state handling across the app.
 - **Styling**: Uses Tailwind CSS for utility-first design and ShadCN UI for pre-built, accessible components.
 - **Validation**: Employs [Zod](https://zod.dev) for schema validation to ensure robust and error-free input handling.
