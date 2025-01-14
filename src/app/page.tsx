@@ -22,7 +22,7 @@ export default function GoToFirstStory () {
     };
 
     useEffect(()=>{
-      if(stories){
+      if(stories?.[0]){
         goToStoryEditPage(stories[0])
       }
     }, [stories])
