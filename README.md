@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Story Writer AI
 
-## Getting Started
+**Story Writer AI** is a demo application showcasing human-AI collaboration in creative storytelling. This project highlights the integration of modern technologies to assist writers in crafting compelling stories, combining the strengths of artificial intelligence with human creativity.
 
-First, run the development server:
+## Product Highlights
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **AI-Assisted Writing**: Generate tailored stories with ai prompting.
+- **Collaborative Editor**: Intuitive editor inspired by Medium, enabling seamless drafting, revision, and story visualization.
+- **Dynamic Image Generation**: Create AI-generated images that complement and enhance narrative elements.
+- **Page-by-Page Development**: Focused story creation, allowing refinement of each section with AI-guided insights.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend**: Built with [React](https://reactjs.org) and [Next.js](https://nextjs.org), leveraging modern component-based design and server-side rendering for a smooth user experience.
+- **Backend**: Powered by [Supabase](https://supabase.com) backend as a service platform offering database management
+- **AI Integration**: Powered by models running on TOGETHER, enabling efficient and scalable AI-driven text generation with GPT4 models and image generation with Flux.
+- **State Management**: React Query, providing efficient and scalable data fetching, caching, and synchronization across the app. ensures efficient data flow and state handling across the app.
+- **Styling**: Uses Tailwind CSS for utility-first design and ShadCN UI for pre-built, accessible components.
+- **Validation**: Employs [Zod](https://zod.dev) for schema validation to ensure robust and error-free input handling.
+- **Deployment**: Hosted on [Vercel](https://vercel.com) for scalable and efficient performance.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## DEMO
+[https://story-writer-ai-steel.vercel.app/](https://story-writer-ai-steel.vercel.app/)
