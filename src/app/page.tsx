@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { fetchMinimalStoryData } from "@/domains/stories/api";
 import { useRouter } from "next/navigation";
 
-export default function GoToFirstStory () {
+// Automatically Redirect to the first story
+export default function App () {
     const [stories, setStories] = useState<any[]>([]);
     const router = useRouter();
 
