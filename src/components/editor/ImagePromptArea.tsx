@@ -18,7 +18,7 @@ export const ImagePromptArea: React.FC<ImagePromptAreaProps> = ({ onSubmit, onBa
         <EditorTextarea onValueChange={handleValueChange} placeholder='Describe a scene or character for image' className={className}>
             <EditorTextareaLeftContent className='flex gap-4'>
                 <button onClick={onBack}><ArrowLeft className='hover:stroke-amber-100' /></button>
-                <EditorImagePromptPicker />
+                <EditorImagePromptPicker isHidden/>
             </EditorTextareaLeftContent>
             <EditorTextareaRightContent>
                 <button onClick={handleSubmit}><Send className='hover:stroke-amber-100' /></button>

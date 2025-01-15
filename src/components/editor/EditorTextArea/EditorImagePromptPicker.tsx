@@ -6,13 +6,13 @@ import { ImageIcon } from "lucide-react";
 import { EditorImageStylesDialog } from "./EditorImageStylesDialog";
 
 interface EditorImagePromptPickerProps {
-
+    isHidden?: boolean
 };
 
 
-export const EditorImagePromptPicker: React.FC<EditorImagePromptPickerProps> = () => {
+export const EditorImagePromptPicker: React.FC<EditorImagePromptPickerProps> = ({ isHidden = false }) => {
    return  <EditorImageStylesDialog>
-        <div className="EditorImagePromptPicker flex items-center gap-4 cursor-pointer group">
+        {!isHidden && <div className="EditorImagePromptPicker flex items-center gap-4 cursor-pointer group">
             <div className="flex">
                 <Button size="icon" className="z-[3] w-[48px] h-[48px]">
                     <ImageIcon className="group-hover:stroke-amber-100"/>
@@ -23,6 +23,6 @@ export const EditorImagePromptPicker: React.FC<EditorImagePromptPickerProps> = (
                 </div>
             </div>
             <p className="hover:text-amber-100">ART STYLES</p>
-        </div>
+        </div>}
     </EditorImageStylesDialog>
 };
