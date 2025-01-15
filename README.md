@@ -1,6 +1,7 @@
 ## DEMO
 [https://story-writer-ai-steel.vercel.app/](https://story-writer-ai-steel.vercel.app/)
 
+<img width="1718" alt="Screenshot 2025-01-14 at 11 11 00 AM" src="https://github.com/user-attachments/assets/717c5023-3d4e-4b5f-afda-9ca42c1b3a0b" />
 
 # Story Writer AI
 
