@@ -24,18 +24,20 @@ export const HeaderDropdownMenu = () => (
         <DropdownMenuContent className="w-56 bg-olive-50 m-4">
         <DropdownMenuLabel>Project</DropdownMenuLabel>
         <DropdownMenuGroup>
-          <Link href="https://www.github.com/duncandevs" target="_blank" passHref>
+          <Link href="https://github.com/duncandevs/story-writer-ai" target="_blank" passHref>
             <DropdownMenuItem>
                 <Github />
                 <span>Github</span>
                 <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </DropdownMenuItem>
           </Link>
-          <DropdownMenuItem>
-            <Info />
-            <span>About</span>
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem>
+          <Link href="https://github.com/duncandevs/story-writer-ai" target="_blank" passHref>
+            <DropdownMenuItem>
+              <Info />
+              <span>About</span>
+              <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+            </DropdownMenuItem>
+          </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuLabel>Account</DropdownMenuLabel>
